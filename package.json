@@ -1,0 +1,25 @@
+{
+  "name": "ducktails",
+  "version": "1.0.0",
+  "description": "This is a CS546 project at Stevens Institute of Technology",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahuldurrani/ducktails.git"
+  },
+  "keywords": [
+    "nodejs",
+    "mongodb",
+    "ducktails",
+    "cocktails"
+  ],
+  "author": "Yuan Dai, Rahul Durrani, Yongxin Feng, Hangyu Li, Ana Parra Vera",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rahuldurrani/ducktails/issues"
+  },
+  "homepage": "https://github.com/rahuldurrani/ducktails#readme"
+}
