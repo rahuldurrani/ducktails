@@ -11,12 +11,19 @@ let exportedMethods = {
             return user;
         });
     },
-    addUser(newUser, password) {
-        return User.register(newUser, password, function(err, user) {
-            if (err) {
-                // handle the error
-            }
-            return user;
+    // addUser(newUser, password) {
+    //     return User.register(newUser, password, function(err, user) {
+    //         if (err) {
+    //             // handle the error
+    //         }
+    //         return user;
+    //     });
+    // },
+    addUser(newUser) {
+        return User.save(newUser).then((doc) => {
+            return doc;
+        }).catch((error) => {
+            return error;
         });
     },
     updateUser(user, id) {
