@@ -1,5 +1,5 @@
 const { mongoose } = require('./../config/mongoose');
-const category = require('./../model/category');
+const { category } = require('./../model/category');
 
 let exportedMethods = {
     getAllCategories() {

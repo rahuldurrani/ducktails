@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const recipe = mongoose.model('recipe', {
+const Recipe = mongoose.model('Recipe', {
     title: {
         type: String,
         required: true,
@@ -51,5 +51,5 @@ const recipe = mongoose.model('recipe', {
 });
 
 module.exports = {
-    recipe
+    Recipe
 };
