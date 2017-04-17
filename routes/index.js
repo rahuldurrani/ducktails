@@ -3,7 +3,7 @@ const categoryRoutes = require("./category");
 const userRoutes = require("./user");
 
 const constructorMethod = (app) => {
-    // app.use("/recipe", recipeRoutes);
+    app.use("/recipe", recipeRoutes);
     app.use("/category", categoryRoutes);
     app.use("/user", userRoutes);
 
