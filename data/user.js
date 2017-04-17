@@ -1,5 +1,5 @@
 const { mongoose } = require('./../config/mongoose');
-const User = require('../model/user');
+const { User } = require('../model/user');
 
 let exportedMethods = {
     getAllUsers() {
@@ -20,7 +20,8 @@ let exportedMethods = {
     //     });
     // },
     addUser(newUser) {
-        return User.save(newUser).then((doc) => {
+        var user = new User(newUser);
+        return user.save(newUser).then((doc) => {
             return doc;
         }).catch((error) => {
             return error;
