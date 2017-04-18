@@ -17,14 +17,13 @@ const Recipe = mongoose.model('Recipe', {
     },
     ingredients: [{
         name: String,
-        quantity: Number
+        quantity: String
     }],
     steps: {
         type: Array,
         default: []
     },
     reviews: [{
-        _id: String,
         reviewer: mongoose.Schema.Types.ObjectId,
         comment: String,
         date: {

@@ -3,7 +3,13 @@ const { category } = require('./../model/category');
 
 let exportedMethods = {
     getAllCategories() {
-        return category.find({}).toArray();
+        return category.find({}, function(err, users) {
+            var categoryMap = {};
+            category.forEach(function(user) {
+                categoryMap[user._id] = user;
+            });
+            return categoryMap;
+        });
     },
     addCategory(name) {
         var cat = new category({
@@ -33,6 +39,9 @@ let exportedMethods = {
         });
     },
     updateCategory(cat, id) {
+        if (!ObjectID.isValid(id)) {
+            throw "Invalid ObjectID";
+        }
         return category.findOneAndUpdate({
             _id: id
         }, {
@@ -46,3 +55,5 @@ let exportedMethods = {
         })
     }
 }
+
+module.exports = exportedMethods;

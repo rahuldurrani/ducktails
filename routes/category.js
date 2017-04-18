@@ -8,7 +8,7 @@ router.get("/:name", (req, res) => {
         res.json(category);
     }).catch((error) => {
         // Not found!
-        res.status(404).json({message: "Category not found"});
+        res.status(404).json({ message: "Category not found" });
     });
 });
 
@@ -35,15 +35,15 @@ router.delete("/:name", (req, res) => {
             res.status(500);
         });
     }).catch(() => {
-        res.status(404).json({message: "Category not found"});
+        res.status(404).json({ message: "Category not found" });
     });
 });
 
 router.post("/name", (req, res) => {
-    let categoryName = req.params.name;
-    
+    let categoryName = req.body.name;
+
     if (!categoryName) {
-        res.status(400).json({ error: "Invalid category name!"});
+        res.status(400).json({ error: "Invalid category name!" });
     }
 
     categoryData.addCategory(categoryName).then((addedCategory) => {
@@ -57,23 +57,23 @@ router.post("/name", (req, res) => {
 router.put("/:name", (req, res) => {
     let categoryName = req.params.name;
     let updatedCategory = req.body;
-    
+
     if (!categoryName) {
-        res.status(400).json({ error: "Invalid category name!"});
+        res.status(400).json({ error: "Invalid category name!" });
     }
     if (!updatedCategory) {
-        res.status(400).json({ error: "Invalid category arguments!"});
+        res.status(400).json({ error: "Invalid category arguments!" });
     }
 
     let currentCategory = categoryData.getCategoryByName(req.params.name);
 
     currentCategory.then(() => {
         return categoryData.updateCategory(updatedCategory, currentCategory.id)
-        .then((resultCategory) => {
-            res.json(resultCategory);
-        }).catch((err) => {
-            res.status(500).json({error: err});
-        });
+            .then((resultCategory) => {
+                res.json(resultCategory);
+            }).catch((err) => {
+                res.status(500).json({ error: err });
+            });
     }).catch((err) => {
         res.status(404).json({ error: err });
     });

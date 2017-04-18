@@ -8,7 +8,7 @@ router.get("/:id", (req, res) => {
         res.json(user);
     }).catch((error) => {
         // Not found!
-        res.status(404).json({message: "User not found"});
+        res.status(404).json({ message: "User not found" });
     });
 });
 
@@ -23,9 +23,9 @@ router.get("/", (req, res) => {
 
 router.post("/newUser", (req, res) => {
     let newUser = req.body;
-    
+
     if (!newUser) {
-        res.status(400).json({ error: "Invalid user arguments!"});
+        res.status(400).json({ error: "Invalid user arguments!" });
     }
 
     userData.addUser(newUser).then((addedUser) => {
@@ -42,12 +42,12 @@ router.put("/:id", (req, res) => {
     let currentUser = userData.getUserById(req.params.id);
 
     currentUser.then(() => {
-        return userData.updateUser(req.params.id, updatedUser)
-        .then((resultUser) => {
-            res.json(resultUser);
-        }).catch((err) => {
-            res.status(500).json({error: err});
-        });
+        return userData.updateUser(updatedUser, req.params.id)
+            .then((resultUser) => {
+                res.json(resultUser);
+            }).catch((err) => {
+                res.status(500).json({ error: err });
+            });
     }).catch((err) => {
         res.status(404).json({ error: err });
     });

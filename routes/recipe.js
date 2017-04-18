@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const data = require("../data");
-const recipeData = data.recipes;
+const recipeData = data.recipe;
 
 router.get("/:id", (req, res) => {
     recipeData.getRecipeById(req.params.id).then((recipe) => {
         res.json(recipe);
     }).catch((error) => {
         // Not found!
-        res.status(404).json({message: "Recipe not found"});
+        res.status(404).json({ message: "Recipe not found" });
     });
 });
 
@@ -23,9 +23,9 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
     let newRecipe = req.body;
-    
+
     if (!newRecipe) {
-        res.status(400).json({ error: "Invalid recipe arguments!"});
+        res.status(400).json({ error: "Invalid recipe arguments!" });
     }
 
     recipeData.addRecipe(newRecipe).then((addedRecipe) => {
@@ -43,11 +43,11 @@ router.put("/:id", (req, res) => {
 
     currentRecipe.then(() => {
         return recipeData.updateRecipe(updatedRecipe, req.params.id)
-        .then((resultRecipe) => {
-            res.json(resultRecipe);
-        }).catch((err) => {
-            res.status(500).json({error: err});
-        });
+            .then((resultRecipe) => {
+                res.json(resultRecipe);
+            }).catch((err) => {
+                res.status(500).json({ error: err });
+            });
     }).catch((err) => {
         res.status(404).json({ error: err });
     });
@@ -67,7 +67,7 @@ router.delete("/:id", (req, res) => {
             res.status(500);
         });
     }).catch(() => {
-        res.status(404).json({message: "Recipe not found"});
+        res.status(404).json({ message: "Recipe not found" });
     });
 });
 
