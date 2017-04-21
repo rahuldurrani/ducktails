@@ -1,32 +1,133 @@
 const express = require('express');
 const router = express.Router();
 
-router.get("/", (req, res) => {
-	res.redirect("/test");
-});
+let recipes = [
+	{	backgroundColor: "black",
+		backgroundPicPath: "/public/img/city-1.jpg",
+		category: "Mediterranean",
+		title: "Mediterranean",
+		link: "http://www.foodandwine.com/recipes/mediterranean-pink-lady", // TODO: action
+		posterLink: "http://www.google.com",
+		posterName: "Terence",
+		description: "Angus Winchester loves limoncello and Campari and wanted to combine them in a classic-style (that is, not overly esoteric or fussy) cocktail. The result is a pretty pink drink that's citrusy and crisp."
+	},
+	{	backgroundColor: "blue",
+		backgroundPicPath: "/public/img/lifestyle-3.jpg",
+		category: "Mediterranean",
+		title: "Mediterranean",
+		link: "http://www.foodandwine.com/recipes/mediterranean-pink-lady",
+		posterLink: "http://www.google.com",
+		posterName: "Terence",
+		description: "Angus Winchester loves limoncello and Campari and wanted to combine them in a classic-style (that is, not overly esoteric or fussy) cocktail. The result is a pretty pink drink that's citrusy and crisp."
+	}
+];
 
-router.get("/test", (req, res) => {
-	let recipes = [
-		{	backgroundColor: "black",
-			backgroundPicPath: "/public/img/city-1.jpg",
-			category: "Mediterranean",
-			title: "Mediterranean",
-			link: "http://www.foodandwine.com/recipes/mediterranean-pink-lady",
-			description: "Angus Winchester loves limoncello and Campari and wanted to combine them in a classic-style (that is, not overly esoteric or fussy) cocktail. The result is a pretty pink drink that's citrusy and crisp."
+// used for user profile page testing
+let demoUser = {
+	firstName: "Terence",
+    lastName: "Feng",
+	// email: not shown in user profile page
+    followers: [{
+    }], // TODO: numbers
+    followees: [{
+    }], // TODO: numbers
+    favRecipes: [{
+    }]
+};
+
+// used for recipe page testing
+let demoRecipe = {
+	creatorName: "Terence",
+	createrProfileLink: "http://www.google.com",
+	creatorProfilePicPath: "/public/img/tim.png",
+	createdDate: "Jan 15, 2017",
+	personalSummary: "Love with ducktails",
+	title: "Cosmopolitan",
+	description: "A cosmopolitan, or informally a cosmo, is a cocktail made with vodka, triple sec, cranberry juice, and freshly squeezed or sweetened lime juice.",
+	recipePicPath: "/public/img/cosmo.jpg",
+	ingredients: [
+		{
+			ingredientIndex: "1",
+			ingredientName: "Vodka Citron",
+			ingredientAmount: "4 cl"
 		},
-		{	backgroundColor: "black",
-			backgroundPicPath: "/public/img/city-1.jpg",
-			category: "Mediterranean",
-			title: "Mediterranean",
-			link: "http://www.foodandwine.com/recipes/mediterranean-pink-lady",
-			description: "Angus Winchester loves limoncello and Campari and wanted to combine them in a classic-style (that is, not overly esoteric or fussy) cocktail. The result is a pretty pink drink that's citrusy and crisp."
+		{
+			ingredientIndex: "2",
+			ingredientName: "Cointreau",
+			ingredientAmount: "1.5cl"
+		},
+		{
+			ingredientIndex: "3",
+			ingredientName: "Fresh lime juice",
+			ingredientAmount: "1.5 cl"
+		},
+		{
+			ingredientIndex: "4",
+			ingredientName: "Cranberry juice",
+			ingredientAmount: "3 cl"
 		}
+	],
+	steps: [
+		{
+			index: "1",
+			operation: "Fill a cocktail shaker with ice then add vodka, triple sec, cranberry juice and lime juice. (We like the extra bite of extra lime juice, so we use 1/2 an ounce in our cosmopolitan cocktails. However, use what is best for your taste). Shake the cocktail shaker for about 30 seconds until well chilled. Then, strain into a martini glass."
+		},
+		{
+			index: "2",
+			operation: "Garnish with orange peel/twist. For an extra burst of flavor, peel the orange twist over the filled cocktail glass. This way, the orange oils spray into the glass."
+		}
+	],
+	comments: [
+		{
+			name: "Kevin Nomad",
+			date: "Jan 16, 2017",
+			profilePicPath: "/public/img/tim.png",
+			content: "Donec ipsum diam, pretium mollis dapibus risus. Nullam tindun pulvinar at interdum eget, suscipit eget felis. Pellentesque est faucibus tincidunt risus id interdum primis orci cubilla gravida id interdum eget."
+		}
+	]
 
-	];
-	res.render("cards/card.handlebars", {
+};
+
+router.get("/", (req, res) => {
+	res.render("recipe_cards/recipe_card.handlebars", {
 		recipes: recipes
 	});
 
+});
+
+router.post("/login", (req, res) => {
+	console.log(req.email);
+	console.log(req.password);
+	res.render("recipe_cards/recipe_card.handlebars", {
+		userLink: "http://www.google.com",
+		recipes: recipes
+	});
+});
+
+router.post("/register", (req, res) => {
+	console.log(req.email);
+	console.log(req.password);
+	res.render("recipe_cards/recipe_card.handlebars", {
+		userLink: "http://www.google.com",
+		recipes: recipes
+	});
+
+});
+
+router.get("/user/:userId", (req, res) => {
+	// TODO: retrive data from database
+	res.render("user_profile/user_profile.handlebars", {
+		user: demoUser
+	});
+});
+
+router.get("/recipe/:recipeId", (req, res) => {
+	// TODO: retrive data from database
+	res.render("recipe/recipe_detail.handlebars", demoRecipe);
+});
+
+router.get("/*", (req, res) => {
+	res.redirect("/");
 });
 
 const construtorMethod = (app) => {
