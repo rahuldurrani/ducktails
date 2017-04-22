@@ -1,0 +1,109 @@
+
+<div id="page" class="container">
+
+	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+	<link href="/public/css/recipe-detail.css" rel="stylesheet" type="text/css" media="all" />
+	<div id="recipeSide">
+		<div id="logo">
+			<img src="{{creatorProfilePicPath}}" alt="" />
+			<h1><a href="{{createrProfileLink}}">{{creatorName}}</a></h1>
+			<span>{{personalSummary}}</span>
+		</div>
+		<div id="menu">
+			<ul>
+				<!-- TODO: share to -->
+				<li><a accesskey="1"><p class="date">Posted on <b>{{createdDate}}</b></p></a></li>
+				<li><a accesskey="2"><p class="date"><b>Contact Poster</b></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="recipeMain">
+		{{#if recipePicPath}}
+		<div id="banner">
+			<img src="{{recipePicPath}}" alt="" class="image-full" />
+		</div>
+		{{/if}}
+		<div id="welcome">
+			<div class="title">
+				<h2>{{title}}</h2>
+			</div>
+			<p>{{description}}</p>
+			<br />
+		</div>
+
+		<!-- ingredients -->
+		<div class="featured">
+			<div class="title">
+				<h3>ingredients</h3>
+			</div>
+			<ul class="style1">
+				{{#each ingredients}}
+				<li>
+					<p class="date"><b>{{ingredientIndex}}</b></p>
+					<h3>{{ingredientName}}</h3>
+					<p>{{ingredientAmount}}</p>
+				</li>
+				{{/each}}
+			</ul>
+			<br />
+		</div>
+
+		<!-- steps -->
+		<div class="featured">
+			<div class="title">
+				<h3>Steps</h3>
+			</div>
+			<ul class="style1">
+				{{#each steps}}
+				<li>
+					<p class="date"><b>{{index}}</b></p>
+					<!-- <h3>{{index}}</h3> -->
+					<p>{{operation}}</p>
+				</li>
+				<br />
+				{{/each}}
+			</ul>
+			<br />
+		</div>
+
+		<!-- comment box -->
+		<div class="row page_margin_top_section">
+			<div class="comment_title">
+				<h3>Leave a Comment</h3>
+			</div>
+			<form class="comment_form" id="commentForm" name="commentForm" method="post" action="/recipe/postComment">
+					<textarea name="message" placeholder="Comment *" class="hint"></textarea>
+					<input type="submit" value="submit" class="comment_button more active">
+			</form>
+			<br />
+		</div>
+
+		<!-- comments -->
+		<div class="featured">
+			<!-- TODO: get number of comments -->
+			<h3 class="title">{{numOfComments}}Comments</h3>
+			<ul id="style1">
+				{{#each comments}}
+				<li class="comment clearfix">
+					<div class="comment_author_avatar">
+						<img src={{profilePicPath}} />
+						<div class="posted_by clearfix">
+							<h5><a class="author" href="#">{{name}}</a></h5>
+						</div>
+						<abbr class="timeago">{{date}}</abbr>
+					</div>
+					<div class="comment_details">
+						<p>{{content}}</p>
+						<!--
+						<a class="read_more" href="#comment_form" title="Reply">
+							<span class="arrow"></span><span>REPLY</span>
+						</a>
+						-->
+					</div>
+				</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+</div>
