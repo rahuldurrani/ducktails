@@ -150,7 +150,7 @@ Array of recipes
 
 ### Register
 ``` HTML
-<form action="register" method="post">
+<form action="/register" method="post">
 <input id="email" type="text" name="email">
 <input id="password" type="password" name="password">
 <input type="submit" value="Create account" name="commit">
