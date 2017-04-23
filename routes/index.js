@@ -19,21 +19,20 @@ let recipes = [
 		posterLink: "http://www.google.com",
 		posterName: "Terence",
 		description: "Angus Winchester loves limoncello and Campari and wanted to combine them in a classic-style (that is, not overly esoteric or fussy) cocktail. The result is a pretty pink drink that's citrusy and crisp."
+	},
+	{	backgroundColor: "orange",
+		backgroundPicPath: "/public/img/lifestyle-3.jpg",
+		category: "Mediterranean",
+		title: "Mediterranean",
+		link: "http://www.foodandwine.com/recipes/mediterranean-pink-lady",
+		posterLink: "http://www.google.com",
+		posterName: "Terence",
+		description: "Angus Winchester loves limoncello and Campari and wanted to combine them in a classic-style (that is, not overly esoteric or fussy) cocktail. The result is a pretty pink drink that's citrusy and crisp."
 	}
+
 ];
 
-// used for user profile page testing
-let demoUser = {
-	firstName: "Terence",
-    lastName: "Feng",
-	// email: not shown in user profile page
-    followers: [{
-    }], // TODO: numbers
-    followees: [{
-    }], // TODO: numbers
-    favRecipes: [{
-    }]
-};
+
 
 // used for recipe page testing
 let demoRecipe = {
@@ -88,6 +87,33 @@ let demoRecipe = {
 
 };
 
+// used for user profile page testing
+let demoUser = {
+	profilePicPath: "/public/img/tim.png",
+	firstName: "Terence",
+    lastName: "Feng",
+	personalSummary: "I pledge my honor that I have abided by the Stevens Honor System",
+	// email: not shown in user profile page
+    followers: [{
+			userId: 0,
+			firstName: "Brandon",
+			profilePicPath: "/public/img/lifestyle-5.jpg",
+			backgroundColor: "green",
+			personalSummary: "I pledge my honor that I have abided by the Stevens Honor System"
+		},
+		{
+			userId: 0,
+			firstName: "Jared",
+			profilePicPath: "/public/img/lifestyle-8.jpg",
+			backgroundColor: "red",
+			personalSummary: "I pledge my honor that I have abided by the Stevens Honor Systems"
+		}
+	], // TODO: numbers
+    followees: [{
+    }], // TODO: numbers
+    recipes: recipes
+};
+
 router.get("/", (req, res) => {
 	res.render("recipe_cards/recipe_card.handlebars", {
 		recipes: recipes
@@ -116,9 +142,12 @@ router.post("/register", (req, res) => {
 
 router.get("/user/:userId", (req, res) => {
 	// TODO: retrive data from database
-	res.render("user_profile/user_profile.handlebars", {
-		user: demoUser
-	});
+	res.render("user/user_profile.handlebars", demoUser);
+});
+
+router.get("/user/:userId/followers", (req, res) => {
+	// TODO: retrive data from database
+	res.render("user/user_followers.handlebars", demoUser);
 });
 
 router.get("/recipe/:recipeId", (req, res) => {

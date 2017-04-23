@@ -624,57 +624,6 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   color: #FFFFFF;
   opacity: 1;
 }
-
-.btn-linkedin {
-  border-color: #0976b4;
-  color: #0976b4;
-}
-.btn-linkedin:hover, .btn-linkedin:focus, .btn-linkedin:active, .btn-linkedin.active, .open > .btn-linkedin.dropdown-toggle {
-  background-color: transparent;
-  color: #0976b4;
-  border-color: #0976b4;
-  opacity: 1;
-}
-.btn-linkedin:disabled, .btn-linkedin[disabled], .btn-linkedin.disabled {
-  background-color: transparent;
-  border-color: #0976b4;
-}
-.btn-linkedin.btn-fill {
-  color: #FFFFFF;
-  background-color: #0976b4;
-  opacity: 0.9;
-}
-.btn-linkedin.btn-fill:hover, .btn-linkedin.btn-fill:focus, .btn-linkedin.btn-fill:active, .btn-linkedin.btn-fill.active, .open > .btn-linkedin.btn-fill.dropdown-toggle {
-  background-color: #0976b4;
-  color: #FFFFFF;
-  opacity: 1;
-}
-
-.btn-dribbble {
-  border-color: #ea4c89;
-  color: #ea4c89;
-}
-.btn-dribbble:hover, .btn-dribbble:focus, .btn-dribbble:active, .btn-dribbble.active, .open > .btn-dribbble.dropdown-toggle {
-  background-color: transparent;
-  color: #ea4c89;
-  border-color: #ea4c89;
-  opacity: 1;
-}
-.btn-dribbble:disabled, .btn-dribbble[disabled], .btn-dribbble.disabled {
-  background-color: transparent;
-  border-color: #ea4c89;
-}
-.btn-dribbble.btn-fill {
-  color: #FFFFFF;
-  background-color: #ea4c89;
-  opacity: 0.9;
-}
-.btn-dribbble.btn-fill:hover, .btn-dribbble.btn-fill:focus, .btn-dribbble.btn-fill:active, .btn-dribbble.btn-fill.active, .open > .btn-dribbble.btn-fill.dropdown-toggle {
-  background-color: #ea4c89;
-  color: #FFFFFF;
-  opacity: 1;
-}
-
 .btn-github {
   border-color: #333333;
   color: #333333;
@@ -700,31 +649,6 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   opacity: 1;
 }
 
-.btn-youtube {
-  border-color: #e52d27;
-  color: #e52d27;
-}
-.btn-youtube:hover, .btn-youtube:focus, .btn-youtube:active, .btn-youtube.active, .open > .btn-youtube.dropdown-toggle {
-  background-color: transparent;
-  color: #e52d27;
-  border-color: #e52d27;
-  opacity: 1;
-}
-.btn-youtube:disabled, .btn-youtube[disabled], .btn-youtube.disabled {
-  background-color: transparent;
-  border-color: #e52d27;
-}
-.btn-youtube.btn-fill {
-  color: #FFFFFF;
-  background-color: #e52d27;
-  opacity: 0.9;
-}
-.btn-youtube.btn-fill:hover, .btn-youtube.btn-fill:focus, .btn-youtube.btn-fill:active, .btn-youtube.btn-fill.active, .open > .btn-youtube.btn-fill.dropdown-toggle {
-  background-color: #e52d27;
-  color: #FFFFFF;
-  opacity: 1;
-}
-
 .btn-stumbleupon {
   border-color: #eb4924;
   color: #eb4924;
@@ -746,56 +670,6 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 }
 .btn-stumbleupon.btn-fill:hover, .btn-stumbleupon.btn-fill:focus, .btn-stumbleupon.btn-fill:active, .btn-stumbleupon.btn-fill.active, .open > .btn-stumbleupon.btn-fill.dropdown-toggle {
   background-color: #eb4924;
-  color: #FFFFFF;
-  opacity: 1;
-}
-
-.btn-reddit {
-  border-color: #ff4500;
-  color: #ff4500;
-}
-.btn-reddit:hover, .btn-reddit:focus, .btn-reddit:active, .btn-reddit.active, .open > .btn-reddit.dropdown-toggle {
-  background-color: transparent;
-  color: #ff4500;
-  border-color: #ff4500;
-  opacity: 1;
-}
-.btn-reddit:disabled, .btn-reddit[disabled], .btn-reddit.disabled {
-  background-color: transparent;
-  border-color: #ff4500;
-}
-.btn-reddit.btn-fill {
-  color: #FFFFFF;
-  background-color: #ff4500;
-  opacity: 0.9;
-}
-.btn-reddit.btn-fill:hover, .btn-reddit.btn-fill:focus, .btn-reddit.btn-fill:active, .btn-reddit.btn-fill.active, .open > .btn-reddit.btn-fill.dropdown-toggle {
-  background-color: #ff4500;
-  color: #FFFFFF;
-  opacity: 1;
-}
-
-.btn-tumblr {
-  border-color: #35465c;
-  color: #35465c;
-}
-.btn-tumblr:hover, .btn-tumblr:focus, .btn-tumblr:active, .btn-tumblr.active, .open > .btn-tumblr.dropdown-toggle {
-  background-color: transparent;
-  color: #35465c;
-  border-color: #35465c;
-  opacity: 1;
-}
-.btn-tumblr:disabled, .btn-tumblr[disabled], .btn-tumblr.disabled {
-  background-color: transparent;
-  border-color: #35465c;
-}
-.btn-tumblr.btn-fill {
-  color: #FFFFFF;
-  background-color: #35465c;
-  opacity: 0.9;
-}
-.btn-tumblr.btn-fill:hover, .btn-tumblr.btn-fill:focus, .btn-tumblr.btn-fill:active, .btn-tumblr.btn-fill.active, .open > .btn-tumblr.btn-fill.dropdown-toggle {
-  background-color: #35465c;
   color: #FFFFFF;
   opacity: 1;
 }
