@@ -6,14 +6,14 @@
 	<div id="recipeSide">
 		<div id="logo">
 			<img src="{{creatorProfilePicPath}}" alt="" />
-			<h1><a href="/user/:{{createrId}}">{{creatorName}}</a></h1>
+			<h1><a href="/user/:{{creatorId}}">{{firstName}} {{lastName}}</a></h1>
 			<span>{{personalSummary}}</span>
 		</div>
 		<div id="menu">
 			<ul>
 				<!-- TODO: share to -->
-				<li><a accesskey="1"><p class="date">Posted on <b>{{createdDate}}</b></p></a></li>
-				<li><a accesskey="2"><p class="date"><b>Contact Poster</b></a></li>
+				<li><a><p class="date">Posted on <b>{{createdDate}}</b></p></a></li>
+				<li><a><p class="date"><b>Contact Poster</b></a></li>
 			</ul>
 		</div>
 	</div>
@@ -40,9 +40,9 @@
 			<ul class="style1">
 				{{#each ingredients}}
 				<li>
-					<p class="date"><b>{{ingredientIndex}}</b></p>
-					<h3>{{ingredientName}}</h3>
-					<p>{{ingredientAmount}}</p>
+					<p class="date"><b>{{index}}</b></p>
+					<h3>{{name}}</h3>
+					<p>{{amount}}</p>
 				</li>
 				{{/each}}
 			</ul>
@@ -89,7 +89,7 @@
 					<div class="comment_author_avatar">
 						<img src={{profilePicPath}} />
 						<div class="posted_by clearfix">
-							<h5><a class="author" href="#">{{name}}</a></h5>
+							<h5><a class="author" href="#">{{firstName}} {lastName}}</a></h5>
 						</div>
 						<abbr class="timeago">{{date}}</abbr>
 					</div>
