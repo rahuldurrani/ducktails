@@ -10,6 +10,8 @@ if authenticated
 ```
 
 ### Home page:
+path:
+> recipe_cards/recipe_card.handlebars
 ```
 Array of recipes
 	{	backgroundColor: String or RGB,
@@ -25,6 +27,8 @@ Array of recipes
 ```
 
 ### Recipe detail
+path:
+> recipe/recipe_detail.handlebars
 ```
 {
 	creatorProfilePicPath: String (path to the picture),
@@ -62,6 +66,8 @@ Array of recipes
 ```
 
 ### User Profile
+path:
+> user/user_profile.handlebars
 ```
 {
 	following: Bool (indicate if the login user is following this user who he/she is visiting)
@@ -107,6 +113,11 @@ Array of recipes
 ```
 
 ### User followers and followees
+path for followers:
+> /user/user_followers.handlebars
+
+path for followees:
+> /user/user_followers.handlebars
 ```
 {
 	following: Any (indicate if the login user is following this user who he/she is visiting)
