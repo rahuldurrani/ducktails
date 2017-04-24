@@ -19,9 +19,11 @@ Array of recipes
 		category: String,
 		recipeId: String,
 		title: String,
-		posterId: String,
-		firstName: String,
-		lastName: String,
+		creator: {
+			id: String,
+			firstName: String,
+			lastName: String,
+		}
 		description: String,
 	}
 ```
@@ -31,11 +33,13 @@ path:
 > recipe/recipe_detail.handlebars
 ```
 {
-	creatorProfilePicPath: String (path to the picture),
-	creatorId: String,
-	firstName: String,
-	lastName: String,
-	personalSummary: String,
+	creator: {
+		profilePicPath: String,
+		id: String,
+		firstName: String,
+		lastName: String,
+		personalSummary: String
+	}
 	createdDate: String, (any format, but unified),
 	recipePicPath: String (path to the picture, optional),
 	title: String
@@ -43,7 +47,7 @@ path:
 	ingredients: [
 		{
 			index: Integer or String,
-			name: String,	
+			name: String,
             amount: String
 		}
 	],
@@ -149,10 +153,36 @@ path for followees:
 }
 ```
 
+### Category List
+```
+	Array of categories: [
+		{
+			recommanded: Exist or Not (exist indicate it the category is recommanded),
+			categoryId: String,
+			name: String,
+			backgroundPicPath: String,
+			description: String,
+			recipes: Array of recipes (same as given in home page),
+		}
+	]
+```
+
+### Category detail
+```
+	{
+		recommanded: Exist or Not (exist indicate it the category is recommanded),
+		categoryId: String,
+		name: String,
+		backgroundPicPath: String,
+		description: String,
+		recipes: Array of recipes (same as given in home page),
+	}
+
+```
+
 ## Actions Sent from Frontend
 
-### Login
-``` HTML
+### Login``` HTML
 <form action="/login" method="post">
 <input id="email" type="text" name="email">
 <input id="password" type="pasword" name="password">

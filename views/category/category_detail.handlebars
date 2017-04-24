@@ -1,0 +1,56 @@
+<div id="page" class="container">
+
+	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+	<link href="/public/css/recipe-detail.css" rel="stylesheet" type="text/css" media="all" />
+	<div id="recipeSide">
+		<div id="logo">
+			<img src="{{backgroundPicPath}}" alt="" />
+			<h1><a target="_self">{{name}}</a></h1>
+			<span>{{description}}</span>
+		</div>
+		<div id="menu">
+			<ul>
+				<li><a><p class="date"><b>{{recipes.length}}</b> Recipes</p></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="recipeMain">
+		{{#each recipes}}
+		<div class="card-box col-md-6 col-sm-7">
+			<div class="card" data-background="color" data-color={{backgroundColor}}>
+				<div class="header">
+					<!-- TODO: read artical link -->
+					<img src={{backgroundPicPath}}>
+					<div class="social-line" data-buttons="4">
+						<button class="btn btn-social btn-facebook">
+							<i class="fa fa-facebook-square"></i>
+						</button>
+						<button class="btn btn-social btn-twitter">
+							<i class="fa fa-twitter"></i>
+						</button>
+						<button class="btn btn-social btn-pinterest">
+							<i class="fa fa-pinterest"></i>
+						</button>
+						<button class="btn btn-social btn-google">
+							<i class="fa fa-google-plus"></i>
+						</button>
+					</div>
+				</div>
+
+				<div class="content">
+					<h4 class="title"><a href="/recipe/:{{recipeId}}"}>{{title}}</a></h4>
+					{{#with creator}}
+					<h6 class="category"><a href="/user/:{{id}}">{{firstName}} {{lastName}}</a></h6>
+					{{else}}
+					<h6 class="category"><a href="/user">Unknown</a></h6>
+					{{/with}}
+					<br />
+					<p class="description">{{description}}</p>
+				</div>
+			</div> <!-- end card -->
+		</div>
+		{{/each}}
+
+	</div>
+</div>

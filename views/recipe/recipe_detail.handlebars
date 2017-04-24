@@ -5,9 +5,11 @@
 	<link href="/public/css/recipe-detail.css" rel="stylesheet" type="text/css" media="all" />
 	<div id="recipeSide">
 		<div id="logo">
-			<img src="{{creatorProfilePicPath}}" alt="" />
-			<h1><a href="/user/:{{creatorId}}">{{firstName}} {{lastName}}</a></h1>
+			{{#with creator}}
+			<img src="{{profilePicPath}}" alt="" />
+			<h1><a href="/user/:{{id}}">{{firstName}} {{lastName}}</a></h1>
 			<span>{{personalSummary}}</span>
+			{{/with}}
 		</div>
 		<div id="menu">
 			<ul>
@@ -95,11 +97,6 @@
 					</div>
 					<div class="comment_details">
 						<p>{{content}}</p>
-						<!--
-						<a class="read_more" href="#comment_form" title="Reply">
-							<span class="arrow"></span><span>REPLY</span>
-						</a>
-						-->
 					</div>
 				</li>
 				{{/each}}

@@ -1,20 +1,16 @@
-<!-- box with share button, only when mouse moves on, share button shows up -->
 
 <div class="wrapper">
+
 	<div class="container">
+	<div class="row">
+		<blockquote class="search_header">
+			<h4>Search Results For '{{searchKeyWord}}' ({{recipes.length}})</h4>
+		</blockquote>
+		<br />
+	</div>
+
 		<div class="masonry-container">
 			<!-- TODO: cards -->
-
-			<div class="card-box col-md-4 col-sm-6">
-				<div class="card card-with-border card-just-text" data-background="color" data-color="orange" >
-					<div class="content">
-						<h4 class="title">"I pledge my honor that I have abided by the Stevens Honor System"</h4>
-						<p class="description">- Stevens Honor Code</p>
-					</div>
-				</div>
-			</div>
-
-
 
 			{{#each recipes}}
 			<div class="card-box col-md-4 col-sm-6">
@@ -41,9 +37,7 @@
 					<div class="content">
 						<h6 class="category">{{category}}</h6>
 						<h4 class="title"><a href="/recipe/:{{recipeId}}">{{title}}</a></h4>
-						{{#with creator}}
-						<p class="description"><a href="/user/:{{id}}">{{firstName}} {{lastName}}</p>
-						{{/with}}
+						<p class="description"><a href="/user/:{{userId}}">{{firstName}} {{lastName}}</p>
 						<p class="description">{{description}}</p>
 					</div>
 				</div> <!-- end card -->

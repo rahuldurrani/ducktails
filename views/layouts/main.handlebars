@@ -17,6 +17,7 @@
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 		<link href='http://fonts.googleapis.com/css?family=Playfair+Display|Raleway:700,100,400|Roboto:400,700|Playfair+Display+SC:400,700' rel='stylesheet' type='text/css'>
 
+
 		<!-- Login and Register -->
 		<link href="/public/css/login-register.css" rel="stylesheet" />
 		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
@@ -43,14 +44,20 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="/">Home</a></li>
-						<li><a href="#">Categories</a></li>
+						<li><a href="/">Home</a></li>
+						<li><a href="/category">Categories</a></li>
 						<li><a href="#">TODO</a></li>
 						<li><a href="#">TODO</a></li>
 					</ul>
+
+					<form class="search" action="/search" method="POST">
+						<input type="text" name="s" placeholder="Search..." class="search_input hint">
+						<input type="submit" class="search_submit" value="">
+					</form>
+
 					<!-- login and register buttons -->
 					<ul class="nav navbar-nav navbar-right">
-					{{#if userLink}}
+					{{#if loginUserId}}
 						<a class="btn big-login" type="submit" href={{userLink}}>My Profile</a>
 					{{else}}
 						<a class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log in</a>
