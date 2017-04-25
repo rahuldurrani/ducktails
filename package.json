@@ -4,6 +4,7 @@
   "description": "This is a CS546 project at Stevens Institute of Technology",
   "main": "app.js",
   "scripts": {
+	"start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +24,9 @@
   },
   "homepage": "https://github.com/rahuldurrani/ducktails#readme",
   "dependencies": {
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.14.2",
+    "handlebars": "^4.0.6"
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "mongoose": "^4.9.4",

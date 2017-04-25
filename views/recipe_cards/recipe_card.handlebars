@@ -1,0 +1,55 @@
+<!-- box with share button, only when mouse moves on, share button shows up -->
+
+<div class="wrapper">
+	<div class="container">
+		<div class="masonry-container">
+			<!-- TODO: cards -->
+
+			<div class="card-box col-md-4 col-sm-6">
+				<div class="card card-with-border card-just-text" data-background="color" data-color="orange" >
+					<div class="content">
+						<h4 class="title">"I pledge my honor that I have abided by the Stevens Honor System"</h4>
+						<p class="description">- Stevens Honor Code</p>
+					</div>
+				</div>
+			</div>
+
+
+
+			{{#each recipes}}
+			<div class="card-box col-md-4 col-sm-6">
+				<div class="card" data-background="color" data-color={{backgroundColor}}>
+					<div class="header">
+						<!-- TODO: read artical link -->
+						<img src={{backgroundPicPath}}>
+						<div class="social-line" data-buttons="4">
+							<button class="btn btn-social btn-facebook">
+								<i class="fa fa-facebook-square"></i>
+							</button>
+							<button class="btn btn-social btn-twitter">
+								<i class="fa fa-twitter"></i>
+							</button>
+							<button class="btn btn-social btn-pinterest">
+								<i class="fa fa-pinterest"></i>
+							</button>
+							<button class="btn btn-social btn-google">
+								<i class="fa fa-google-plus"></i>
+							</button>
+						</div>
+					</div>
+
+					<div class="content">
+						<h6 class="category">{{category}}</h6>
+						<h4 class="title"><a href="/recipe/:{{recipeId}}">{{title}}</a></h4>
+						{{#with creator}}
+						<p class="description"><a href="/user/:{{id}}">{{firstName}} {{lastName}}</p>
+						{{/with}}
+						<p class="description">{{description}}</p>
+					</div>
+				</div> <!-- end card -->
+			</div>
+			{{/each}}
+
+		</div> <!-- masonry-container end -->
+	</div> <!-- container end -->
+</div> <!-- wrapper end-->
