@@ -1,12 +1,12 @@
 const validator = require('validator');
 const mongoose = require('mongoose');
 const Schema = require('mongoose').Schema;
-//const passportLocalMongoose = require('passport-local-mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const user = new Schema({
     firstName: String,
     lastName: String,
-    email: {
+    username: {
         type: String,
         trim: true,
         required: true,
@@ -33,7 +33,7 @@ const user = new Schema({
     }]
 });
 
-//User.plugin(passportLocalMongoose);
+user.plugin(passportLocalMongoose);
 
 const User = mongoose.model('User', user)
 

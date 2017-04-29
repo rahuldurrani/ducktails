@@ -1,11 +1,41 @@
 const express = require('express');
 const router = express.Router();
 const data = require("../data");
+const { User } = require("../model/user");
 const userData = data.user;
+const recipeData = data.recipe;
+const passport = require('passport');
 
+let recipes = [];
 router.get("/:id", (req, res) => {
     userData.getUserById(req.params.id).then((user) => {
-        res.json(user);
+        let userTemplate = {};
+        userTemplate.firstName = user[0].firstName;
+        userTemplate.lastName = user[0].lastName;
+        userTemplate.recipes = [];
+
+        recipeData.getAllRecipesForUser(req.params.id).then((recipeList) => {
+            recipeList.map(function(recipe, i) {
+                let card = {};
+                if (i + 1 % 1 === 0) {
+                    card.backgroundColor = "black";
+                } else if (i + 1 % 2 === 0) {
+                    card.backgroundColor = "blue";
+                } else {
+                    card.backgroundColor = "orange";
+                }
+                card.backgroundPicPath = '/public/img/city-1.jpg';
+                card.category = 'Mediterranean';
+                card.title = recipe.title;
+                card.link = "http://www.foodandwine.com/recipes/mediterranean-pink-lady";
+                card.firstName = recipe.creator.name;
+                card.description = recipe.description;
+                card.recipeId = recipe._id;
+                card.id = recipe.creator._id;
+                userTemplate.recipes.push(card);
+            });
+        })
+        res.render("user/user_profile.handlebars", userTemplate);
     }).catch((error) => {
         // Not found!
         res.status(404).json({ message: "User not found" });
@@ -18,6 +48,18 @@ router.get("/", (req, res) => {
     }, () => {
         // Something went wrong with the server!
         res.status(500).send();
+    });
+});
+
+router.post("/register", (req, res) => {
+    User.register(new User({ username: req.body.username }), req.body.password, function(err, user) {
+        if (err) {
+            return res.json(err);
+        }
+
+        passport.authenticate('local')(req, res, function() {
+            res.redirect('/');
+        });
     });
 });
 

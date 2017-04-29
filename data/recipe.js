@@ -3,9 +3,18 @@ const { Recipe } = require('./../model/recipe');
 
 let exportedMethods = {
     getAllRecipes() {
-        return Recipe.find({}, function(err, users) {
+        return Recipe.find({}, function(err, recipe) {
             var RecipeMap = {};
-            Recipe.forEach(function(user) {
+            recipe.forEach(function(user) {
+                RecipeMap[user._id] = user;
+            });
+            return RecipeMap;
+        });
+    },
+    getAllRecipesForUser(userId) {
+        return Recipe.find({ "creator._id": userId }, function(err, recipe) {
+            var RecipeMap = {};
+            recipe.forEach(function(user) {
                 RecipeMap[user._id] = user;
             });
             return RecipeMap;
