@@ -165,11 +165,13 @@
 const recipeRoutes = require("./recipe");
 const categoryRoutes = require("./category");
 const userRoutes = require("./user");
+const signupRoutes = require("./signup");
 
 const constructorMethod = (app) => {
     app.use("/recipe", recipeRoutes);
     app.use("/category", categoryRoutes);
     app.use("/user", userRoutes);
+    app.use("/signup", signupRoutes);
 
     app.use("*", (req, res) => {
         res.redirect('/recipe/');

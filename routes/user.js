@@ -51,18 +51,6 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/register", (req, res) => {
-    User.register(new User({ username: req.body.username }), req.body.password, function(err, user) {
-        if (err) {
-            return res.json(err);
-        }
-
-        passport.authenticate('local')(req, res, function() {
-            res.redirect('/');
-        });
-    });
-});
-
 router.post("/newUser", (req, res) => {
     let newUser = req.body;
 

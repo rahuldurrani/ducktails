@@ -37,6 +37,6 @@ app.set('view engine', 'handlebars');
 
 configRoutes(app);
 
-app.listen(3000, () => {
-    console.log("The routes will be running on htyp://localhost:3000");
+app.listen(4000, () => {
+    console.log("The routes will be running on htyp://localhost:4000");
 });
