@@ -3,7 +3,7 @@ const userData = require("./user");
 const categoryData = require("./category");
 
 module.exports = {
-    users: userData,
+    user: userData,
     recipe: recipeData,
-    user: userData
+    category: categoryData
 };

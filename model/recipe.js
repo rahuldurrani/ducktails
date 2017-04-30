@@ -7,6 +7,9 @@ const Recipe = mongoose.model('Recipe', {
         minlength: 1,
         trim: true
     },
+    description: {
+        type: String
+    },
     preptime: {
         type: Number,
         default: null
@@ -16,16 +19,15 @@ const Recipe = mongoose.model('Recipe', {
         default: null
     },
     ingredients: [{
-        name: String,
-        quantity: Number
+        name: String
     }],
     steps: {
         type: Array,
         default: []
     },
     reviews: [{
-        _id: String,
         reviewer: mongoose.Schema.Types.ObjectId,
+        name: String,
         comment: String,
         date: {
             type: Date,
@@ -40,12 +42,12 @@ const Recipe = mongoose.model('Recipe', {
         votes: Number,
         favs: Number
     },
-    _creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: false
+    creator: {
+        _id: String,
+        name: String,
     },
-    _category: [{
-        type: mongoose.Schema.Types.ObjectId,
+    category: [{
+        type: String,
         required: true
     }]
 });

@@ -1,9 +1,16 @@
 const { mongoose } = require('./../config/mongoose');
 const { User } = require('../model/user');
+const { ObjectID } = require('mongodb');
 
 let exportedMethods = {
     getAllUsers() {
-        return User.find({}).toArray();
+        return User.find({}, function(err, users) {
+            var userMap = {};
+            users.forEach(function(user) {
+                userMap[user._id] = user;
+            });
+            return userMap;
+        });
     },
     getUserById(id) {
         return User.find({ _id: id }).then((user) => {
@@ -28,6 +35,9 @@ let exportedMethods = {
         });
     },
     updateUser(user, id) {
+        if (!ObjectID.isValid(id)) {
+            throw "Invalid ObjectID";
+        }
         return User.findOneAndUpdate({
             _id: id
         }, {
@@ -35,10 +45,10 @@ let exportedMethods = {
         }, {
             new: true
         }).then((user) => {
-            if (!todo) {
+            if (!user) {
                 return;
             }
-            return todo;
+            return user;
         }).catch((error) => {
             return error;
         });
@@ -48,4 +58,4 @@ let exportedMethods = {
     }
 };
 
-module.exports = { exportedMethods };
+module.exports = exportedMethods;

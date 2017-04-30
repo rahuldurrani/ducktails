@@ -1,0 +1,62 @@
+
+<div id="page" class="container">
+
+	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+	<link href="/public/css/recipe-detail.css" rel="stylesheet" type="text/css" media="all" />
+	<div id="recipeSide">
+		<div id="logo">
+			<img src="{{profilePicPath}}" alt="" />
+			<h1><a target="_self">{{firstName}} {{lastName}}</a></h1>
+			<span>{{personalSummary}}</span>
+		</div>
+		<div id="menu">
+			<ul>
+				{{#if following}}
+				<li class="unselectable"><a><button class="follow-btn">FOLLOW</button></a></li>
+				{{else}}
+				<li class="unselectable"><a><button formmethod="post" type="submit" formaction="/user/follow/:{{userId}}" class="follow-btn">FOLLOW</button></a></li>
+				{{/if}}
+				<!-- TODO: list of followers -->
+				<li><a href="/user/{{userId}}/followers"><p class="date"><b>{{followers.length}}</b> Followers</p></a></li>
+				<!-- TODO: list of followers -->
+				<li><a href="/user/{{userId}}/followees"><p class="date"><b>{{followees.length}}</b> Followees</p></a></li>
+				<!-- TODO: contact with email -->
+				<li><a><p class="date"><b>Contact</b></p></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="recipeMain">
+		{{#each recipes}}
+		<div class="card-box col-md-6 col-sm-7">
+			<div class="card" data-background="color" data-color={{backgroundColor}}>
+				<div class="header">
+					<!-- TODO: read artical link -->
+					<img src={{backgroundPicPath}}>
+					<div class="social-line" data-buttons="4">
+						<button class="btn btn-social btn-facebook">
+							<i class="fa fa-facebook-square"></i>
+						</button>
+						<button class="btn btn-social btn-twitter">
+							<i class="fa fa-twitter"></i>
+						</button>
+						<button class="btn btn-social btn-pinterest">
+							<i class="fa fa-pinterest"></i>
+						</button>
+						<button class="btn btn-social btn-google">
+							<i class="fa fa-google-plus"></i>
+						</button>
+					</div>
+				</div>
+
+				<div class="content">
+					<h6 class="category">{{category}}</h6>
+					<h4 class="title"><a href="/recipe/{{recipeId}}"}>{{title}}</a></h4>
+					<p class="description">{{description}}</p>
+				</div>
+			</div> <!-- end card -->
+		</div>
+		{{/each}}
+
+	</div>
+</div>

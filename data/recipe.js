@@ -3,7 +3,22 @@ const { Recipe } = require('./../model/recipe');
 
 let exportedMethods = {
     getAllRecipes() {
-        return Recipe.find({}).toArray();
+        return Recipe.find({}, function(err, recipe) {
+            var RecipeMap = {};
+            recipe.forEach(function(user) {
+                RecipeMap[user._id] = user;
+            });
+            return RecipeMap;
+        });
+    },
+    getAllRecipesForUser(userId) {
+        return Recipe.find({ "creator._id": userId }, function(err, recipe) {
+            var RecipeMap = {};
+            recipe.forEach(function(user) {
+                RecipeMap[user._id] = user;
+            });
+            return RecipeMap;
+        });
     },
     getRecipeById(id) {
         return Recipe.find({
@@ -15,7 +30,7 @@ let exportedMethods = {
         });
     },
     addRecipe(newRecipe) {
-        var nrecipe = new Recipe({ newRecipe });
+        var nrecipe = new Recipe(newRecipe);
         return nrecipe.save(newRecipe).then((recipe) => {
             return recipe;
         }).catch((error) => {
@@ -30,6 +45,9 @@ let exportedMethods = {
         });
     },
     updateRecipe(recipe, id) {
+        if (!ObjectID.isValid(id)) {
+            throw "Invalid ObjectID";
+        }
         return Recipe.findOneAndUpdate({
             _id: id
         }, {
@@ -43,3 +61,4 @@ let exportedMethods = {
         })
     }
 }
+module.exports = exportedMethods;

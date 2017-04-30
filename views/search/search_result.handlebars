@@ -1,0 +1,49 @@
+
+<div class="wrapper">
+
+	<div class="container">
+	<div class="row">
+		<blockquote class="search_header">
+			<h4>Search Results For '{{searchKeyWord}}' ({{recipes.length}})</h4>
+		</blockquote>
+		<br />
+	</div>
+
+		<div class="masonry-container">
+			<!-- TODO: cards -->
+
+			{{#each recipes}}
+			<div class="card-box col-md-4 col-sm-6">
+				<div class="card" data-background="color" data-color={{backgroundColor}}>
+					<div class="header">
+						<!-- TODO: read artical link -->
+						<img src={{backgroundPicPath}}>
+						<div class="social-line" data-buttons="4">
+							<button class="btn btn-social btn-facebook">
+								<i class="fa fa-facebook-square"></i>
+							</button>
+							<button class="btn btn-social btn-twitter">
+								<i class="fa fa-twitter"></i>
+							</button>
+							<button class="btn btn-social btn-pinterest">
+								<i class="fa fa-pinterest"></i>
+							</button>
+							<button class="btn btn-social btn-google">
+								<i class="fa fa-google-plus"></i>
+							</button>
+						</div>
+					</div>
+
+					<div class="content">
+						<h6 class="category">{{category}}</h6>
+						<h4 class="title"><a href="/recipe/:{{recipeId}}">{{title}}</a></h4>
+						<p class="description"><a href="/user/:{{userId}}">{{firstName}} {{lastName}}</p>
+						<p class="description">{{description}}</p>
+					</div>
+				</div> <!-- end card -->
+			</div>
+			{{/each}}
+
+		</div> <!-- masonry-container end -->
+	</div> <!-- container end -->
+</div> <!-- wrapper end-->
