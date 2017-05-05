@@ -13,11 +13,11 @@
 			<ul>
                 {{#if self}}
                 <li><a href="/user/:{{userId}}/edit_profile">EDIT PROFILE</a></li>
-				{{else if following}}
-				<li class="unselectable"><a><button class="follow-btn">FOLLOW</button></a></li>
-				{{else}}
-				<li class="unselectable"><a><button formmethod="post" type="submit" formaction="/user/follow/:{{userId}}" class="follow-btn">FOLLOW</button></a></li>
-				{{/if}}
+                {{else if following}}
+                <li class="unselectable"><a><button class="follow-btn">FOLLOW</button></a></li>
+                {{else}}
+                <li class="unselectable"><a><button formmethod="post" type="submit" formaction="/user/follow/:{{userId}}" class="follow-btn">FOLLOW</button></a></li>
+                {{/if}}
 				<!-- TODO: list of followers -->
 				<li><a href="/user/:{{userId}}/followers"><p class="date"><b>{{followers.length}}</b> Followers</p></a></li>
 				<!-- TODO: list of followers -->
