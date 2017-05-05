@@ -19,9 +19,9 @@
                 <li class="unselectable"><a><button formmethod="post" type="submit" formaction="/user/follow/:{{userId}}" class="follow-btn">FOLLOW</button></a></li>
                 {{/if}}
 				<!-- TODO: list of followers -->
-				<li><a href="/user/:{{userId}}/followers"><p class="date"><b>{{followers.length}}</b> Followers</p></a></li>
+				<li><a href="/user/followers"><p class="date"><b>{{followers.length}}</b> Followers</p></a></li>
 				<!-- TODO: list of followers -->
-				<li><a href="/user/:{{userId}}/followees"><p class="date"><b>{{followees.length}}</b> Followees</p></a></li>
+				<li><a href="/user/followees"><p class="date"><b>{{followees.length}}</b> Followees</p></a></li>
 				<!-- TODO: contact with email -->
 				<li><a><p class="date"><b>Contact</b></p></a></li>
 			</ul>
@@ -65,7 +65,7 @@
 
 				<div class="content">
 					<h6 class="category">{{category}}</h6>
-					<h4 class="title"><a href="/recipe/:{{recipeId}}"}>{{title}}</a></h4>
+					<h4 class="title"><a href="/recipe/{{recipeId}}"}>{{title}}</a></h4>
 					<p class="description">{{description}}</p>
 				</div>
 			</div> <!-- end card -->

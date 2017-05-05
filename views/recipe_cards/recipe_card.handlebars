@@ -40,10 +40,10 @@
 
 					<div class="content">
 						<h6 class="category">{{category}}</h6>
-						<h4 class="title"><a href="/recipe/:{{recipeId}}">{{title}}</a></h4>
-						{{#with creator}}
-						<p class="description"><a href="/user/:{{id}}">{{firstName}} {{lastName}}</p>
-						{{/with}}
+						<h4 class="title"><a href="/recipe/{{recipeId}}">{{title}}</a></h4>
+						{{!--{{#with creator}}--}}
+						<p class="description"><a href="/user/{{id}}">{{firstName}} {{lastName}}</p>
+						{{!--{{/with}}--}}
 						<p class="description">{{description}}</p>
 					</div>
 				</div> <!-- end card -->
