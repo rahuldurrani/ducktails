@@ -1,0 +1,145 @@
+.container {
+    margin-bottom: 20px;
+}
+
+.container h2 {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.container h3 {
+    float: left;
+    font-size: 20px;
+    /* font-weight: 200; */
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.container p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.contact input[type="text"], .contact input[type="email"], .contact input[type="password"] {
+    width: 94.5%;
+    padding: 10px;
+    margin: 10px 0;
+    outline: none;
+    color: #000;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+
+.contact textarea {
+    width: 94.5%;
+    border: none;
+    padding: 10px;
+    margin: 10px 0;
+    color: #000;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+
+.contact select {
+    width: 94.5%;
+    height: 35px;
+    border: none;
+    padding: 10px;
+    margin: 10px 0;
+    color: #000;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+}
+
+.contact textarea {
+    height: 100px;
+}
+
+.contact ::-webkit-input-placeholder {
+    color: #666;
+}
+
+.contact ::-moz-placeholder {
+    color: #666;
+}
+
+.contact ::-moz-placeholder {
+    color: #666;
+}
+
+.contact ::-ms-input-placeholder {
+    color: #666;
+}
+
+.picture-container {
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+}
+
+.picture {
+  width: 106px;
+  height: 106px;
+  background-color: #999999;
+  border: 4px solid #CCCCCC;
+  color: #FFFFFF;
+  border-radius: 50%;
+  margin: 5px auto;
+  overflow: hidden;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+.picture:hover {
+  border-color: #2ca8ff;
+}
+.picture input[type="file"] {
+  cursor: pointer;
+  display: block;
+  height: 100%;
+  left: 0;
+  opacity: 0 !important;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.send-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.send-button input[type="submit"] {
+    padding: 10px 0;
+    width: 60%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    color: #FFF;
+    background-color: #2196F3;
+    cursor: pointer;
+}
+
+.send-button input[type="submit"]:hover {
+    background-color: #055d54;
+}
+
+.footer {
+    margin: 50px 20px 30px;
+}
+
+.footer p a {
+    color: #FFF;
+}
+
+.footer p {
+    line-height: 30px;
+}
+
+.footer p a:hover {
+    color: #F96D6E;
+}
+

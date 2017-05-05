@@ -1,38 +1,37 @@
 const express = require('express');
 const router = express.Router();
 
+demoUser1 = {
+	id: 0,
+	firstName: "Brandon",
+	lastName: "Yuan"
+}
+
 let recipes = [
 	{	backgroundColor: "black",
 		backgroundPicPath: "/public/img/city-1.jpg",
 		category: "Mediterranean",
 		title: "Mediterranean",
 		link: "http://www.foodandwine.com/recipes/mediterranean-pink-lady", // TODO: action
-		posterLink: "http://www.google.com",
-		posterName: "Terence",
+		creator: demoUser1,
 		description: "Angus Winchester loves limoncello and Campari and wanted to combine them in a classic-style (that is, not overly esoteric or fussy) cocktail. The result is a pretty pink drink that's citrusy and crisp."
 	},
 	{	backgroundColor: "blue",
 		backgroundPicPath: "/public/img/lifestyle-3.jpg",
 		category: "Mediterranean",
 		title: "Mediterranean",
-		link: "http://www.foodandwine.com/recipes/mediterranean-pink-lady",
-		posterLink: "http://www.google.com",
-		posterName: "Terence",
+		creator: demoUser1,
 		description: "Angus Winchester loves limoncello and Campari and wanted to combine them in a classic-style (that is, not overly esoteric or fussy) cocktail. The result is a pretty pink drink that's citrusy and crisp."
 	},
 	{	backgroundColor: "orange",
 		backgroundPicPath: "/public/img/lifestyle-3.jpg",
 		category: "Mediterranean",
 		title: "Mediterranean",
-		link: "http://www.foodandwine.com/recipes/mediterranean-pink-lady",
-		posterLink: "http://www.google.com",
-		posterName: "Terence",
+		creator: demoUser1,
 		description: "Angus Winchester loves limoncello and Campari and wanted to combine them in a classic-style (that is, not overly esoteric or fussy) cocktail. The result is a pretty pink drink that's citrusy and crisp."
 	}
 
 ];
-
-
 
 // used for recipe page testing
 let demoRecipe = {
@@ -89,9 +88,11 @@ let demoRecipe = {
 
 // used for user profile page testing
 let demoUser = {
+	self: true,
+	id: 0,
 	profilePicPath: "/public/img/tim.png",
-	firstName: "Terence",
-    lastName: "Feng",
+	firstName: "Jeffery",
+    lastName: "Coddeman",
 	personalSummary: "I pledge my honor that I have abided by the Stevens Honor System",
 	// email: not shown in user profile page
     followers: [{
@@ -114,8 +115,28 @@ let demoUser = {
     recipes: recipes
 };
 
+let categories = [
+	{
+		recommanded: true,
+		categoryId: 0,
+		name: "ANCESTRALS",
+		backgroundPicPath: "/public/img/lifestyle-6.jpg",
+		description: "These are among the original, early 19th century-style cocktails, listed in vintage bar guides as simply \"Whiskey Cocktail\" or \"Improved Gin Cocktail\" and the like. These drinks are composed of a base spirit lightly adorned with sugar (in some cases, the sweetener appears in the form of a dash or two of liqueur such as maraschino or curacao), bitters, and water (usually in its frozen form), and served either straight up or on the rocks.",
+		recipes: recipes,
+	},
+	{
+		categoryId: 0,
+		name: "ANCESTRALS",
+		backgroundPicPath: "/public/img/lifestyle-8.jpg",
+		description: "These are among the original, early 19th century-style cocktails, listed in vintage bar guides as simply \"Whiskey Cocktail\" or \"Improved Gin Cocktail\" and the like. These drinks are composed of a base spirit lightly adorned with sugar (in some cases, the sweetener appears in the form of a dash or two of liqueur such as maraschino or curacao), bitters, and water (usually in its frozen form), and served either straight up or on the rocks."
+	}
+
+];
+
+
 router.get("/", (req, res) => {
 	res.render("recipe_cards/recipe_card.handlebars", {
+        require_login: true,
 		recipes: recipes
 	});
 
@@ -145,14 +166,44 @@ router.get("/user/:userId", (req, res) => {
 	res.render("user/user_profile.handlebars", demoUser);
 });
 
+router.get("/user/:id/edit_profile", (req, res) => {
+	res.render("user/edit_profile.handlebars", demoUser);
+});
+
 router.get("/user/:userId/followers", (req, res) => {
 	// TODO: retrive data from database
 	res.render("user/user_followers.handlebars", demoUser);
 });
 
+router.get("/recipe/create_recipe", (req, res) => {
+	res.render("recipe/create_recipe.handlebars", {
+        categories: categories
+    });
+});
+
 router.get("/recipe/:recipeId", (req, res) => {
 	// TODO: retrive data from database
 	res.render("recipe/recipe_detail.handlebars", demoRecipe);
+});
+
+router.post("/search", (req, res) => {
+
+	let keyword;
+	res.render("search/search_result.handlebars", {
+		searchKeyWord: keyword,
+		recipes: recipes
+	});
+});
+
+router.get("/category", (req, res) => {
+	res.render("category/category_list.handlebars", {
+		categories: categories
+	});
+});
+
+router.get("/category/:id", (req, res) => {
+	console.log(categories[0]);
+	res.render("category/category_detail.handlebars", categories[0]);
 });
 
 router.get("/*", (req, res) => {
