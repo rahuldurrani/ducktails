@@ -7,6 +7,7 @@ const Recipe = mongoose.model('Recipe', {
         minlength: 1,
         trim: true
     },
+    recipePicPath: String,
     description: {
         type: String
     },
@@ -26,13 +27,10 @@ const Recipe = mongoose.model('Recipe', {
         default: []
     },
     reviews: [{
-        reviewer: mongoose.Schema.Types.ObjectId,
         name: String,
-        comment: String,
-        date: {
-            type: Date,
-            default: Date.now
-        }
+        content: String,
+        date: String,
+        profilePicPath: String
     }],
     date: {
         type: Date,

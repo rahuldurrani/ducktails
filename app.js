@@ -5,8 +5,7 @@ const static = express.static(__dirname + '/public');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-
+const flash = require('connect-flash');
 
 const configRoutes = require("./routes");
 
@@ -22,14 +21,11 @@ app.use(require('express-session')({
     resave: false,
     saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
-
-const { User } = require('./model/user');
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
+app.use(flash());
+require('./config/passport')(passport);
 
 app.use('/public', static);
 app.engine('handlebars', handlebarInstance.engine);
@@ -38,5 +34,5 @@ app.set('view engine', 'handlebars');
 configRoutes(app);
 
 app.listen(3000, () => {
-    console.log("The routes will be running on htyp://localhost:3000");
+    console.log("The routes will be running on http://localhost:3000");
 });

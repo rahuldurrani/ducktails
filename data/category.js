@@ -3,9 +3,9 @@ const { category } = require('./../model/category');
 
 let exportedMethods = {
     getAllCategories() {
-        return category.find({}, function(err, users) {
+        return category.find({}, function(err, cat) {
             var categoryMap = {};
-            category.forEach(function(user) {
+            cat.forEach(function(user) {
                 categoryMap[user._id] = user;
             });
             return categoryMap;

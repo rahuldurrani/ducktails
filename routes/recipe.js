@@ -1,7 +1,9 @@
+const _ = require('lodash');
 const express = require('express');
 const router = express.Router();
 const data = require("../data");
 const recipeData = data.recipe;
+const moment = require('moment');
 
 let recipes = [];
 router.get("/:id", (req, res) => {
@@ -9,8 +11,15 @@ router.get("/:id", (req, res) => {
         // res.json(recipe);
         let recipe = {};
         recipe.creatorName = recipeDoc[0].creator.name;
+        recipe.createrProfileLink = '/user'
         recipe.title = recipeDoc[0].title;
+        recipe.recipePicPath = recipeDoc[0].recipePicPath;
         recipe.description = recipeDoc[0].description;
+        let comments = [];
+        recipeDoc[0].reviews.map(function(comment) {
+            comments.push(comment);
+        });
+        recipe.comments = comments;
         let ingredients = [];
         recipeDoc[0].ingredients.map(function(ingr, i) {
             let ingredient = {};
@@ -29,7 +38,7 @@ router.get("/:id", (req, res) => {
             steps.push(step);
         });
         recipe.steps = steps;
-        recipe.createdDate = recipeDoc[0].date;
+        recipe.createdDate = moment(recipeDoc[0].date).format('MM/DD/YYYY');
         res.render("recipe/recipe_detail.handlebars", recipe);
     }).catch((error) => {
         // Not found!
@@ -49,8 +58,8 @@ router.get("/", (req, res) => {
             } else {
                 card.backgroundColor = "orange";
             }
-            card.backgroundPicPath = '/public/img/city-1.jpg';
-            card.category = 'Mediterranean';
+            card.backgroundPicPath = recipe.recipePicPath;
+            card.category = 'Margarita';
             card.title = recipe.title;
             card.link = "http://www.foodandwine.com/recipes/mediterranean-pink-lady";
             card.firstName = recipe.creator.name;
