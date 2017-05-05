@@ -11,11 +11,13 @@
 		</div>
 		<div id="menu">
 			<ul>
-				{{#if following}}
-				<li class="unselectable"><a><button class="follow-btn">FOLLOW</button></a></li>
-				{{else}}
-				<li class="unselectable"><a><button formmethod="post" type="submit" formaction="/user/follow/:{{userId}}" class="follow-btn">FOLLOW</button></a></li>
-				{{/if}}
+                {{#if self}}
+                <li><a href="/user/:{{userId}}/edit_profile">EDIT PROFILE</a></li>
+                {{else if following}}
+                <li class="unselectable"><a><button class="follow-btn">FOLLOW</button></a></li>
+                {{else}}
+                <li class="unselectable"><a><button formmethod="post" type="submit" formaction="/user/follow/:{{userId}}" class="follow-btn">FOLLOW</button></a></li>
+                {{/if}}
 				<!-- TODO: list of followers -->
 				<li><a href="/user/followers"><p class="date"><b>{{followers.length}}</b> Followers</p></a></li>
 				<!-- TODO: list of followers -->
@@ -27,6 +29,18 @@
 	</div>
 
 	<div id="recipeMain">
+        {{#if self}}
+            <div class="card-box col-md-6 col-sm-7">
+                <a href="/recipe/create_recipe">
+                <div class="card card-with-border card-just-text" data-background="color" data-color="orange" >
+                    <div class="content">
+                        <h4 class="title">Create <b>YOUR OWN</b> recipe"</h4>
+                        <p class="description">- Ducktails</p>
+                    </div>
+                </div> <!-- end card -->
+                </a>
+            </div>
+        {{/if}}
 		{{#each recipes}}
 		<div class="card-box col-md-6 col-sm-7">
 			<div class="card" data-background="color" data-color={{backgroundColor}}>

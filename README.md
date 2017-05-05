@@ -1,12 +1,16 @@
 
 # Ducktails Frontend Documentation
 ## Data Needed from Backend
-### All Pages
+### *All Pages*
 ```
 if authenticated
 	{
 		loginUserId: String
 	}
+if require login
+    {
+        require_login: Bool (true)
+    }
 ```
 
 ### Home page:
@@ -69,12 +73,28 @@ path:
 }
 ```
 
+### Recipe Creation
+path:
+> /recipe/create_recipe.handlebars
+
+```
+{
+    categories: [
+        {
+            categoryId: String,
+            name: String
+        }
+    ]
+}
+```
+
 ### User Profile
 path:
 > user/user_profile.handlebars
 ```
 {
-	following: Bool (indicate if the login user is following this user who he/she is visiting)
+    self: Bool,
+	following: Bool (indicate if the login user is following this user who he/she is visiting),
 	profilePicPath: String,
 	userId: String,
 	firstName: String,
@@ -124,6 +144,7 @@ path for followees:
 > /user/user_followers.handlebars
 ```
 {
+    self: Bool,
 	following: Any (indicate if the login user is following this user who he/she is visiting)
 	profilePicPath: String,
 	userId: String,
@@ -150,6 +171,41 @@ path for followees:
 			personalSummary: String
 		}
 	],
+}
+```
+
+### User Profile Edit
+path:
+> user/edit_profile.handlebars
+
+```HTML
+{
+    self: Bool,
+    following: Bool (indicate if the login user is following this user who he/she is visiting),
+    profilePicPath: String,
+    userId: String,
+    firstName: String,
+    lastName: String,
+    followers: [
+        {
+            userId: String,
+            backgroundColor: String or RGB
+            profilePicPath: String,
+            firstName: String,
+            lastName: String,
+            personalSummary: String
+        }
+    ],
+    followees: [
+        {
+            userId: String,
+            backgroundColor: String or RGB
+            profilePicPath: String,
+            firstName: String,
+            lastName: String,
+            personalSummary: String
+        }
+    ]
 }
 ```
 
@@ -182,7 +238,8 @@ path for followees:
 
 ## Actions Sent from Frontend
 
-### Login``` HTML
+### Login
+```HTML
 <form action="/login" method="post">
 <input id="email" type="text" name="email">
 <input id="password" type="pasword" name="password">
@@ -190,7 +247,7 @@ path for followees:
 ```
 
 ### Register
-``` HTML
+```HTML
 <form action="/register" method="post">
 <input id="email" type="text" name="email">
 <input id="password" type="password" name="password">
@@ -202,6 +259,28 @@ path for followees:
 <button formmethod="post" type="submit" formaction="/user/follow/:{{userId}}">
 ```
 
+### Recipe Creation
+``` HTML
+<input type="text" Name="Title" required="" id="title">
+<input type="text" Name="Cook Time" required="" id="cookTime">
+<input type="text" Name="Serving" required="" id="serving">
+<textarea type="text" Name="Ingredients" id="ingredients"></textarea>
+<textarea type="text" Name="Cooking Steps" id="steps"></textarea>
+<select id="category"> </select>
+<input type="submit" value="POST" formmethod="post" formaction="/recipe/:{{userId}}/create_recipe" />
+```
+
+### User Profile Edit
+``` HTML
+<input type="file" id="profilePic"/>
+<input type="text" Name="First Name:" required="">
+<input type="text" Name="Last Name" required="">
+<input type="text" Name="Username" required="">
+<input type="email" Name="Email" required="">
+<input type="text" Name="PersonalSummary" >
+<input type="submit" value="SAVE" formmethod="post" formaction="/user/:{{userId}}/save_profile_edit" />
+
+```
 
 
 Group project for CS 546 at Stevens Institute of Technology

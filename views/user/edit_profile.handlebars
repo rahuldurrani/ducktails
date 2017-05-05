@@ -1,0 +1,50 @@
+
+<div id="page" class="container">
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href="/public/css/recipe-detail.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="/public/css/edit_profile.css" rel="stylesheet" type="text/css" media="all" />
+
+    <form action="#" method="post">
+        <div id="recipeSide">
+            <div class="picture-container">
+                <div class="picture">
+                    <img src="{{profilePicPath}}" id="picture-src">
+                    <input type="file" id="profilePic" value="{{profilePicPath}}" />
+                </div>
+                <h6>Choose a picture</h6>
+            </div>
+            <div id="menu">
+                <ul>
+                    <!-- TODO: list of followers -->
+                    <li><a href="/user/:{{userId}}/followers"><p class="date"><b>{{followers.length}}</b> Followers</p></a></li>
+                    <!-- TODO: list of followers -->
+                    <li><a href="/user/:{{userId}}/followees"><p class="date"><b>{{followees.length}}</b> Followees</p></a></li>
+                    <!-- TODO: contact with email -->
+                    <li><a><p class="date"><b>Contact</b></p></a></li>
+                </ul>
+            </div>
+        </div>
+            <div class="contact">
+                <h3>First Name:</h3>
+
+        <div id="recipeMain">
+            <div class="contact">
+                <h3>First Name:</h3>
+                <input type="text" Name="First Name:" value="{{firstName}}" required="">
+                <h3>Last Name:</h3>
+                <input type="text" Name="Last Name" value="{{lastName}}" required="">
+                <h3>Username:</h3>
+                <input type="text" Name="Username" value="{{lastName}}" required="">
+                <h3>Email:</h3>
+                <input type="email" Name="Email" placeholder="{{email}}" required="">
+                <h3>Personal Summary:</h3>
+                <input type="text" Name="PersonalSummary" value="{{personalSummary}}" required="">
+                <div class="send-button">
+                    <input type="submit" value="SAVE" formmethod="post" formaction="/user/:{{userId}}/save_profile_edit" />
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
