@@ -7,10 +7,6 @@ if authenticated
 	{
 		loginUserId: String
 	}
-if require login
-    {
-        require_login: Bool (true)
-    }
 ```
 
 ### Home page:
@@ -30,6 +26,13 @@ Array of recipes
 		}
 		description: String,
 	}
+```
+
+### Login/Signup
+path:
+> login_signup/login_signup.handlebars
+```
+    {}
 ```
 
 ### Recipe detail
@@ -237,6 +240,11 @@ path:
 ```
 
 ## Actions Sent from Frontend
+
+### Jump to login Pages
+```HTML
+<... onClick="window.location="/login" />
+```
 
 ### Login
 ```HTML

@@ -142,6 +142,10 @@ router.get("/", (req, res) => {
 
 });
 
+router.get("/login", (req, res) => {
+    res.render("login_signup/login_signup.handlebars", {});
+});
+
 router.post("/login", (req, res) => {
 	console.log(req.email);
 	console.log(req.password);
