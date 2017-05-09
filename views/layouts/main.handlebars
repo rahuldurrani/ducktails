@@ -58,7 +58,8 @@
 					<!-- login and register buttons -->
 					<ul class="nav navbar-nav navbar-right">
 					{{#if loginUserId}}
-						<a class="btn big-login" type="submit" href={{userLink}}>My Profile</a>
+						<a class="btn big-login" type="submit" href="/user">My Profile</a>
+						<a class="btn big-login" type="submit" href="/logout">Logout</a>
 					{{else}}
 						<a class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Log in</a>
                  <a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Register</a></div>

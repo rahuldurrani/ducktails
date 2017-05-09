@@ -3,9 +3,50 @@ const express = require('express');
 const router = express.Router();
 const data = require("../data");
 const recipeData = data.recipe;
+const userData = data.user;
 const moment = require('moment');
+const multer = require('multer');
 
 let recipes = [];
+
+router.get('/create_recipe', (req, res) => {
+    res.render("recipe/create_recipe.handlebars", {});
+});
+
+router.post('/create_recipe', multer({ dest: './public/img/' }).single('profilePic'), (req, res) => {
+    let newRecipe = {};
+    let ingredients = [];
+    newRecipe.title = req.body.Title;
+    newRecipe.servings = req.body.serving;
+    newRecipe.preptime = req.body.cookTime;
+    if (req.file) {
+        newRecipe.recipePicPath = "/" + req.file.path;
+    }
+    newRecipe.steps = req.body.steps.split(/\r?\n/);
+    req.body.ingredients.split(/\r?\n/).map(function(ingredient) {
+        let doc = {};
+        doc.name = ingredient;
+        ingredients.push(doc);
+    });
+    newRecipe.ingredients = ingredients;
+
+    userData.getUserById(req.user._id).then((user) => {
+        let creator = {};
+        creator._id = user[0]._id;
+        creator.name = user[0].firstName + " " + user[0].lastName;
+        newRecipe.creator = creator;
+    }).then(() => {
+        console.log(newRecipe);
+        recipeData.addRecipe(newRecipe).then((addedRecipe) => {
+
+            res.redirect('/' + addedRecipe._id);
+        }, () => {
+            res.sendStatus(500);
+        });
+    });
+
+});
+
 router.get("/:id", (req, res) => {
     recipeData.getRecipeById(req.params.id).then((recipeDoc) => {
         // res.json(recipe);
@@ -15,6 +56,9 @@ router.get("/:id", (req, res) => {
         recipe.title = recipeDoc[0].title;
         recipe.recipePicPath = recipeDoc[0].recipePicPath;
         recipe.description = recipeDoc[0].description;
+        if (req.isAuthenticated()) {
+            recipe.loginUserId = req.user._id;
+        }
         let comments = [];
         recipeDoc[0].reviews.map(function(comment) {
             comments.push(comment);
@@ -47,8 +91,12 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/", (req, res) => {
+    let loginUserId = false;
+    if (req.isAuthenticated()) {
+        loginUserId = true;
+    }
     recipeData.getAllRecipes().then((recipeList) => {
-        // res.json(recipeList);
+
         recipeList.map(function(recipe, i) {
             let card = {};
             if (i + 1 % 1 === 0) {
@@ -68,13 +116,17 @@ router.get("/", (req, res) => {
             card.id = recipe.creator._id;
             recipes.push(card);
         });
-        res.render("recipe_cards/recipe_card.handlebars", { recipes: recipes })
+
+        res.render("recipe_cards/recipe_card.handlebars", { recipes, loginUserId })
         recipes = [];
     }, () => {
         // Something went wrong with the server!
         res.status(500).send();
     });
 });
+
+
+
 
 router.post("/", (req, res) => {
     let newRecipe = req.body;
