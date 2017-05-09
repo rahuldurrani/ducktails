@@ -4,13 +4,33 @@ const router = express.Router();
 const data = require("../data");
 const recipeData = data.recipe;
 const userData = data.user;
+const categoryData = data.category;
 const moment = require('moment');
 const multer = require('multer');
 
 let recipes = [];
 
-router.get('/create_recipe', (req, res) => {
-    res.render("recipe/create_recipe.handlebars", {});
+router.get('/create_recipe', isLoggedIn, (req, res) => {
+    let categories = [];
+    let loginUserId = false;
+    if (req.isAuthenticated()) {
+        loginUserId = true;
+    }
+    categoryData.getAllCategories().then((categoryList) => {
+        // res.json(categoryList);
+        categoryList.map(function(category) {
+            let card = {};
+            card.categoryId = category._id;
+            card.name = category.name;
+            card.recommended = true;
+            categories.push(card);
+        });
+        res.render("recipe/create_recipe.handlebars", { categories: categories, loginUserId });
+    }, () => {
+        // Something went wrong with the server!
+        res.status(500).send();
+    });
+    // res.render("recipe/create_recipe.handlebars", {});
 });
 
 router.post('/create_recipe', multer({ dest: './public/img/' }).single('profilePic'), (req, res) => {
@@ -97,11 +117,12 @@ router.get("/", (req, res) => {
     }
     recipeData.getAllRecipes().then((recipeList) => {
 
-        recipeList.map(function(recipe, i) {
+        recipeList.map(function(recipe) {
             let card = {};
-            if (i + 1 % 1 === 0) {
+            let i = Math.floor(Math.random() * 3) + 1
+            if (i === 1) {
                 card.backgroundColor = "black";
-            } else if (i + 1 % 2 === 0) {
+            } else if (i == 2) {
                 card.backgroundColor = "blue";
             } else {
                 card.backgroundColor = "orange";
@@ -177,6 +198,19 @@ router.delete("/:id", (req, res) => {
         res.status(404).json({ message: "Recipe not found" });
     });
 });
+
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated())
+        return next();
+
+    // if they aren't redirect them to the home page
+    //res.redirect('/123');
+    res.render("user/user_profile.handlebars", {
+        require_login: true
+    });
+}
 
 
 module.exports = router;

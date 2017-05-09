@@ -13,8 +13,21 @@ router.get("/:name", (req, res) => {
 });
 
 router.get("/", (req, res) => {
+    let categories = [];
+    let loginUserId = false;
+    if (req.isAuthenticated()) {
+        loginUserId = true;
+    }
     categoryData.getAllCategories().then((categoryList) => {
-        res.json(categoryList);
+        // res.json(categoryList);
+        categoryList.map(function(category) {
+            let card = {};
+            card.categoryId = category._id;
+            card.name = category.name;
+            card.recommended = true;
+            categories.push(card);
+        });
+        res.render("category/category_list.handlebars", { categories: categories, loginUserId });
     }, () => {
         // Something went wrong with the server!
         res.status(500).send();
@@ -39,7 +52,7 @@ router.delete("/:name", (req, res) => {
     });
 });
 
-router.post("/name", (req, res) => {
+router.post("/", (req, res) => {
     let categoryName = req.body.name;
 
     if (!categoryName) {
@@ -54,8 +67,8 @@ router.post("/name", (req, res) => {
 
 });
 
-router.put("/:name", (req, res) => {
-    let categoryName = req.params.name;
+router.put("/", (req, res) => {
+    let categoryName = req.body.name;
     let updatedCategory = req.body;
 
     if (!categoryName) {
