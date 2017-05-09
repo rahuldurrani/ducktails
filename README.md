@@ -272,6 +272,7 @@ path:
 <input type="text" Name="Title" required="" id="title">
 <input type="text" Name="Cook Time" required="" id="cookTime">
 <input type="text" Name="Serving" required="" id="serving">
+<textarea type="text" Name="Description" id="description"></textarea>
 <textarea type="text" Name="Ingredients" id="ingredients"></textarea>
 <textarea type="text" Name="Cooking Steps" id="steps"></textarea>
 <select id="category"> </select>
