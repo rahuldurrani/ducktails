@@ -1,0 +1,40 @@
+
+<div id="page" class="container">
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href="/public/css/create_recipe.css" rel="stylesheet" type="text/css" media="all" />
+
+    <div id="recipeMain">
+        <div class="contact">
+            <form action="#" method="post" enctype="multipart/form-data">
+                <div class="picture-container">
+                    <div class="picture">
+                        <img id="picture-src">
+                        <input type="file" name="recipePic" id="recipePic" value="{{profilePicPath}}"></input>
+                        <p>Choose a picture</p>
+                    </div>
+                </div>
+                <h3>Title:</h3>
+                <input type="text" Name="Title" placeholder="Title" required="" id="title">
+                <h3>Cook Time:</h3>
+                <input type="text" Name="cookTime" placeholder="x Min y Sec..." required="" id="cookTime">
+                <h3>Serving:</h3>
+                <input type="text" Name="serving" placeholder="x Min y Sec..." required="" id="serving">
+                <h3>Ingredients:</h3>
+                <textarea type="text" Name="ingredients" placeholder="List everything needed" id="ingredients"></textarea>
+                <h3>Cooking Step:</h3>
+                <textarea type="text" Name="steps" placeholder="Whatever needed" id="steps"></textarea>
+                <h3>Category:</h3>
+                <select id="category">
+                    {{#each categories}}
+                    <option value="{{categoryId}}">{{name}}</option>
+                    {{/each}}
+                </select>
+                <div class="send-button">
+                <input type="submit" value="POST" formmethod="post" formaction="/recipe/create_recipe" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
