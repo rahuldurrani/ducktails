@@ -42,6 +42,6 @@ User page can be accessed by clicking on the user's name on the recipe card on t
 >Note: All forms can handle picture uploads. User can upload their profile pic or recipe's pic.
 
 Group project for CS 546 at Stevens Institute of Technology
-Group Members: Yuan Dai, Rahul Durrani, Yongxin Feng, Hangyu Li, Ana Parra Vera
+Group Members: Yunan Dai, Rahul Durrani, Yongxin Feng, Hangyu Li, Ana Parra Vera
 
 This is a application in node js that enables user to post and share cocktail recipes.
