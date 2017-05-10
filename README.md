@@ -32,7 +32,14 @@ Each user has access to their profile page which can be used to update personal 
 User can create a recipe by clicking on Add recipe option form the profile page. Clicking on the option takes you to a form in which can be filled out to add a recipe.
 #### 5. Log out
 User can log out using the log out button visible if the user is logged in.
+#### 6. Home page
+The home page contains a list of all the recipes in the database displayed in the form of pintrest like cards.
+#### 7.Recipe Page
+Clicking on the recipe title on the recipe card will take you to a recipe page. Recipe detail page displays all the relevent data on screen.
+#### 8.User page
+User page can be accessed by clicking on the user's name on the recipe card on the homepage. A user's profile page will display basic user information and all the recipes added by the user.
 
+>Note: All forms can handle picture uploads. User can upload their profile pic or recipe's pic.
 
 Group project for CS 546 at Stevens Institute of Technology
 Group Members: Yuan Dai, Rahul Durrani, Yongxin Feng, Hangyu Li, Ana Parra Vera
