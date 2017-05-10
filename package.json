@@ -1,32 +1,44 @@
 {
-  "name": "ducktails",
-  "version": "1.0.0",
-  "description": "This is a CS546 project at Stevens Institute of Technology",
-  "main": "app.js",
-  "scripts": {
-	"start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rahuldurrani/ducktails.git"
-  },
-  "keywords": [
-    "nodejs",
-    "mongodb",
-    "ducktails",
-    "cocktails"
-  ],
-  "author": "Yuan Dai, Rahul Durrani, Yongxin Feng, Hangyu Li, Ana Parra Vera",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rahuldurrani/ducktails/issues"
-  },
-  "homepage": "https://github.com/rahuldurrani/ducktails#readme",
-  "dependencies": {
-    "express": "^4.14.0",
-    "express-handlebars": "^3.0.0",
-    "express-session": "^1.14.2",
-    "handlebars": "^4.0.6"
-  }
+    "name": "ducktails",
+    "version": "1.0.0",
+    "description": "This is a CS546 project at Stevens Institute of Technology",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rahuldurrani/ducktails.git"
+    },
+    "keywords": [
+        "nodejs",
+        "mongodb",
+        "ducktails",
+        "cocktails"
+    ],
+    "author": "Yuan Dai, Rahul Durrani, Yongxin Feng, Hangyu Li, Ana Parra Vera",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/rahuldurrani/ducktails/issues"
+    },
+    "homepage": "https://github.com/rahuldurrani/ducktails#readme",
+    "dependencies": {
+        "bcrypt-nodejs": "0.0.3",
+        "body-parser": "^1.17.1",
+        "connect-ensure-login": "^0.1.1",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.4.3",
+        "express": "^4.15.2",
+        "express-handlebars": "^3.0.0",
+        "express-session": "^1.14.2",
+        "handlebars": "^4.0.6",
+        "lodash": "^4.17.4",
+        "moment": "^2.18.1",
+        "mongoose": "^4.9.4",
+        "multer": "^1.3.0",
+        "passport": "^0.3.2",
+        "passport-local": "^1.0.0",
+        "validator": "^7.0.0"
+    }
 }

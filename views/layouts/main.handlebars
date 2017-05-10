@@ -58,7 +58,8 @@
 					<!-- login and register buttons -->
 					<ul class="nav navbar-nav navbar-right">
 					{{#if loginUserId}}
-						<a class="btn big-login" type="submit" href={{userLink}}>My Profile</a>
+						<a class="btn big-login" type="submit" href="/user">My Profile</a>
+						<a class="btn big-login" type="submit" href="/logout">Logout</a>
 					{{else}}
                         <a class="btn big-login" onclick="window.location='/login';">Log in / Sign up</a>
 					{{/if}}
@@ -106,7 +107,7 @@
 								<div class="box">
 									<div class="content registerBox" style="display:none;">
 										<div class="form">
-											<form method="post" html="{:multipart=>true}" data-remote="true" action="/register" accept-charset="UTF-8">
+											<form method="post" html="{:multipart=>true}" data-remote="true" action="/signup" accept-charset="UTF-8">
 												<input id="email" class="form-control" type="text" placeholder="Email" name="email">
 												<input id="password" class="form-control" type="password" placeholder="Password" name="password">
 												<input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
