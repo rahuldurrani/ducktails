@@ -6,26 +6,26 @@
 
     <div id="recipeMain">
         <div class="contact">
-            <form action="#" method="post">
+            <form action="#" method="post" enctype="multipart/form-data">
                 <div class="picture-container">
                     <div class="picture">
                         <img id="picture-src">
-                        <input type="file" id="recipePic" value="{{profilePicPath}}"></input>
+                        <input type="file" name="recipePic" id="recipePic" value="{{profilePicPath}}"></input>
                         <p>Choose a picture</p>
                     </div>
                 </div>
                 <h3>Title:</h3>
                 <input type="text" Name="Title" placeholder="Title" required="" id="title">
                 <h3>Cook Time:</h3>
-                <input type="text" Name="Cook Time" placeholder="x Min y Sec..." required="" id="cookTime">
+                <input type="text" Name="cookTime" placeholder="x Min y Sec..." required="" id="cookTime">
                 <h3>Serving:</h3>
-                <input type="text" Name="Serving" placeholder="x Min y Sec..." required="" id="serving">
+                <input type="text" Name="serving" placeholder="x Min y Sec..." required="" id="serving">
                 <h3>Description:</h3>
-                <textarea type="text" Name="Description" placeholder="Write down a brief piece of descrition for others to get your recipe easier" id="description"></textarea>
+                <textarea type="text" Name="description" placeholder="Write down a brief piece of descrition for others to get your recipe easier" id="description"></textarea>
                 <h3>Ingredients:</h3>
-                <textarea type="text" Name="Ingredients" placeholder="List everything needed" id="ingredients"></textarea>
+                <textarea type="text" Name="ingredients" placeholder="List everything needed" id="ingredients"></textarea>
                 <h3>Cooking Step:</h3>
-                <textarea type="text" Name="Cooking Steps" placeholder="Whatever needed" id="steps"></textarea>
+                <textarea type="text" Name="steps" placeholder="Whatever needed" id="steps"></textarea>
                 <h3>Category:</h3>
                 <select id="category">
                     {{#each categories}}
@@ -33,7 +33,7 @@
                     {{/each}}
                 </select>
                 <div class="send-button">
-                <input type="submit" value="POST" formmethod="post" formaction="/recipe/:{{userId}}/create_recipe" />
+                <input type="submit" value="POST" formmethod="post" formaction="/recipe/create_recipe" />
                 </div>
 
             </form>
