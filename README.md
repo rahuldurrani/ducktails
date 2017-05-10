@@ -7,10 +7,6 @@ if authenticated
 	{
 		loginUserId: String
 	}
-if require login
-    {
-        require_login: Bool (true)
-    }
 ```
 
 ### Home page:
@@ -30,6 +26,13 @@ Array of recipes
 		}
 		description: String,
 	}
+```
+
+### Login/Signup
+path:
+> login_signup/login_signup.handlebars
+```
+    {}
 ```
 
 ### Recipe detail
@@ -238,6 +241,11 @@ path:
 
 ## Actions Sent from Frontend
 
+### Jump to login Pages
+```HTML
+<... onClick="window.location="/login" />
+```
+
 ### Login
 ```HTML
 <form action="/login" method="post">
@@ -264,6 +272,7 @@ path:
 <input type="text" Name="Title" required="" id="title">
 <input type="text" Name="Cook Time" required="" id="cookTime">
 <input type="text" Name="Serving" required="" id="serving">
+<textarea type="text" Name="Description" id="description"></textarea>
 <textarea type="text" Name="Ingredients" id="ingredients"></textarea>
 <textarea type="text" Name="Cooking Steps" id="steps"></textarea>
 <select id="category"> </select>
