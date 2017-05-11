@@ -33,13 +33,14 @@ router.get('/create_recipe', isLoggedIn, (req, res) => {
     // res.render("recipe/create_recipe.handlebars", {});
 });
 
-router.post('/create_recipe', multer({ dest: './public/img/' }).single('profilePic'), (req, res) => {
+router.post('/create_recipe', multer({ dest: './public/img/' }).single('recipePic'), (req, res) => {
     let newRecipe = {};
     let ingredients = [];
     newRecipe.title = req.body.Title;
     newRecipe.servings = req.body.serving;
     newRecipe.preptime = req.body.cookTime;
     newRecipe.description = req.body.description;
+    newRecipe.category = req.body.category
     if (req.file) {
         newRecipe.recipePicPath = "/" + req.file.path;
     }
@@ -129,7 +130,7 @@ router.get("/", (req, res) => {
                 card.backgroundColor = "orange";
             }
             card.backgroundPicPath = recipe.recipePicPath;
-            card.category = 'Margarita';
+            card.category = recipe.category;
             card.title = recipe.title;
             card.link = "http://www.foodandwine.com/recipes/mediterranean-pink-lady";
             card.firstName = recipe.creator.name;

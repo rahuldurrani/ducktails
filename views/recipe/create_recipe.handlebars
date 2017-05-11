@@ -27,9 +27,9 @@
                 <h3>Cooking Step:</h3>
                 <textarea type="text" Name="steps" placeholder="Whatever needed" id="steps"></textarea>
                 <h3>Category:</h3>
-                <select id="category">
+                <select id="category" name="category">
                     {{#each categories}}
-                    <option value="{{categoryId}}">{{name}}</option>
+                    <option value="{{name}}">{{name}}</option>
                     {{/each}}
                 </select>
                 <div class="send-button">
