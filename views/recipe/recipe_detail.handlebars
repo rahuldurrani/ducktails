@@ -13,17 +13,35 @@
 		</div>
 		<div id="menu">
 			<ul>
-				<!-- TODO: share to -->
-				<li><a><p class="date">Posted on <b>{{createdDate}}</b></p></a></li>
-				<li><a><p class="date"><b>Contact Poster</b></a></li>
+                <li><a href="/category/:{{category}}"><p class="date">Category: <b>{{category}}</b></p></a></li>
+                <li><a><p class="date">Posted on <b>{{createdDate}}</b></p></a></li>
 			</ul>
 		</div>
 	</div>
 
 	<div id="recipeMain">
+
+        {{#if self}}
+            <div class="header">
+                <a id="editButton" class="btn" href="/recipe/edit_recipe/:{{id}}">Edit This Recipe</a>
+            </div>
+        {{else}}
+            <div class="header">
+                {{#if favorited}}
+                <a id="favorite" class="btn" type="submit" formmethod="put" formaction="/user/unfavorite/:{{id}}">Unfavorite</a>
+                {{else}}
+                <a id="favorite" class="btn" type="submit" formmethod="put" formaction="/user/favorite/:{{id}}">Favorite</a>
+                {{/if}}
+            </div>
+        {{/if}}
+        <br/>
+
+
 		{{#if recipePicPath}}
 		<div id="banner">
-			<img src="{{recipePicPath}}" alt="" class="image-full" />
+            <div id="recipe-profile">
+                <img src="{{recipePicPath}}" alt="" class="image-full" />
+            </div>
 		</div>
 		{{/if}}
 		<div id="welcome">
@@ -87,15 +105,14 @@
 
 		<!-- comments -->
 		<div class="featured">
-			<!-- TODO: get number of comments -->
-			<h3 class="title">{{numOfComments}}Comments</h3>
+			<h3 class="title">{{comments.length}}Comments</h3>
 			<ul id="style1">
 				{{#each comments}}
 				<li class="comment clearfix">
 					<div class="comment_author_avatar">
 						<img src={{profilePicPath}} />
 						<div class="posted_by clearfix">
-							<h5><a class="author" href="#">{{firstName}} {lastName}}</a></h5>
+							<h5><a class="author" href="#">{{firstName}} {{lastName}}</a></h5>
 						</div>
 						<abbr class="timeago">{{date}}</abbr>
 					</div>

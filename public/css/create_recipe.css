@@ -23,6 +23,8 @@
 }
 
 .contact input[type="text"], .contact input[type="email"], .contact input[type="password"] {
+    clear: both;
+    display: block;
     width: 94.5%;
     padding: 10px;
     margin: 10px 0;
@@ -106,13 +108,18 @@
 }
 
 .send-button {
-    text-align: center;
+    /* text-align: center; */
+    width: 91%;
+    display: block;
     margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.send-button input[type="submit"] {
-    padding: 10px 0;
-    width: 60%;
+.send-button input[type="submit"]
+{
+    padding: 10px 3px;
+    width: 30%;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-weight: 500;
@@ -123,8 +130,24 @@
     cursor: pointer;
 }
 
+.send-button input[type="button"] {
+    padding: 10px 3px;
+    width: 30%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    color: #FFF;
+    background-color: #ff5050;
+    cursor: pointer;
+}
+
 .send-button input[type="submit"]:hover {
     background-color: #055d54;
+}
+.send-button input[type="button"]:hover {
+    background-color: #;
 }
 
 .footer {

@@ -40,6 +40,9 @@ path:
 > recipe/recipe_detail.handlebars
 ```
 {
+    self: Bool,
+    category: String,
+    favorited: Bool,
 	creator: {
 		profilePicPath: String,
 		id: String,
@@ -82,6 +85,27 @@ path:
 
 ```
 {
+    categories: [
+        {
+            categoryId: String,
+            name: String
+        }
+    ]
+}
+```
+
+### Edit recipes
+path:
+> /recipe/edit_recipe.handlebars
+
+```
+{
+    title: String,
+    cookTime: String,
+    serving: String,
+    description: String,
+    ingredients: String,
+    steps: String,
     categories: [
         {
             categoryId: String,
@@ -267,6 +291,12 @@ path:
 <button formmethod="post" type="submit" formaction="/user/follow/:{{userId}}">
 ```
 
+### Favorite / Unfavorite
+``` HTML
+<a type="submit" formmethod="put" formaction="/user/unfavorite/:{{id}}">Unfavorite</a>
+<a type="submit" formmethod="put" formaction="/user/favorite/:{{id}}">Favorite</a>
+```
+
 ### Recipe Creation
 ``` HTML
 <input type="text" Name="Title" required="" id="title">
@@ -277,6 +307,24 @@ path:
 <textarea type="text" Name="Cooking Steps" id="steps"></textarea>
 <select id="category"> </select>
 <input type="submit" value="POST" formmethod="post" formaction="/recipe/:{{userId}}/create_recipe" />
+```
+
+### Jump to Edit Recipe Pages
+``` HTML
+<a id="editButton" class="btn" href="/recipe/edit_recipe/:{{id}}">Edit This Recipe</a>
+```
+
+### Edit Recipe
+``` HTML
+<input type="text" Name="Title" required="" id="title">
+<input type="text" Name="Cook Time" required="" id="cookTime">
+<input type="text" Name="Serving" required="" id="serving">
+<textarea type="text" Name="Description" id="description"></textarea>
+<textarea type="text" Name="Ingredients" id="ingredients"></textarea>
+<textarea type="text" Name="Cooking Steps" id="steps"></textarea>
+<select id="category"> </select>
+<input type="submit" value="POST" formmethod="post" formaction="/recipe/:{{userId}}/create_recipe" />
+<input type="button" value="DELETE" formmethod="delete" formaction="/recipe/:{{id}}" />
 ```
 
 ### User Profile Edit
