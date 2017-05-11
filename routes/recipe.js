@@ -33,7 +33,7 @@ router.get('/create_recipe', isLoggedIn, (req, res) => {
     // res.render("recipe/create_recipe.handlebars", {});
 });
 
-router.post('/create_recipe', multer({ dest: './public/img/' }).single('profilePic'), (req, res) => {
+router.post('/create_recipe', multer({ dest: './public/img/' }).single('recipePic'), (req, res) => {
     let newRecipe = {};
     let ingredients = [];
     newRecipe.title = req.body.Title;
