@@ -18,13 +18,10 @@
                 {{else}}
                 <li class="unselectable"><a><button formmethod="post" type="submit" formaction="/user/follow/:{{userId}}" class="follow-btn">FOLLOW</button></a></li>
                 {{/if}}
-
-                <li><a href="/user/:{{userId}}/followers"><p class="date"><b>{{followers.length}}</b> Followers</p></a></li>
-                <li><a href="/user/:{{userId}}/followees"><p class="date"><b>{{followees.length}}</b> Followees</p></a></li>
-                {{#if self}}
-                <li class="unselectable"><a><button formmethod="post" type="submit" formaction="/user/logout" class="follow-btn">LOGOUT</button></a></li>
-                {{/if}}
-       </ul>
+                <li><a href="/user/followers"><p class="date"><b>{{followers.length}}</b> Followers</p></a></li>
+                <li><a href="/user/followees"><p class="date"><b>{{followees.length}}</b> Followees</p></a></li>
+                <li><a><p class="date"><b>Contact</b></p></a></li>
+            </ul>
 		</div>
 	</div>
 

@@ -39,6 +39,7 @@ router.post('/create_recipe', multer({ dest: './public/img/' }).single('profileP
     newRecipe.title = req.body.Title;
     newRecipe.servings = req.body.serving;
     newRecipe.preptime = req.body.cookTime;
+    newRecipe.description = req.body.description;
     if (req.file) {
         newRecipe.recipePicPath = "/" + req.file.path;
     }
@@ -206,10 +207,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
-    //res.redirect('/123');
-    res.render("user/user_profile.handlebars", {
-        require_login: true
-    });
+    res.redirect('/login');
 }
 
 
