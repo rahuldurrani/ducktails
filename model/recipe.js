@@ -29,7 +29,10 @@ const Recipe = mongoose.model('Recipe', {
     reviews: [{
         name: String,
         content: String,
-        date: String,
+        date: {
+            type: Date,
+            default: Date.now
+        },
         profilePicPath: String
     }],
     date: {

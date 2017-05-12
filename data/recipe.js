@@ -59,6 +59,20 @@ let exportedMethods = {
         }).catch((error) => {
             return error;
         })
+    },
+    addComment(comment, id) {
+        return Recipe.findOneAndUpdate({
+            _id: id
+        }, {
+            $push: { reviews: comment }
+        }, {
+            safe: true,
+            upsert: true
+        }).then((recipe) => {
+            return recipe;
+        }).catch((error) => {
+            return error;
+        })
     }
 }
 module.exports = exportedMethods;

@@ -73,6 +73,7 @@ router.get("/:id", (req, res) => {
     recipeData.getRecipeById(req.params.id).then((recipeDoc) => {
         // res.json(recipe);
         let recipe = {};
+        recipe.recipeid = recipeDoc[0]._id;
         recipe.creatorName = recipeDoc[0].creator.name;
         recipe.createrProfileLink = '/user'
         recipe.title = recipeDoc[0].title;
@@ -148,9 +149,6 @@ router.get("/", (req, res) => {
     });
 });
 
-
-
-
 router.post("/", (req, res) => {
     let newRecipe = req.body;
 
@@ -200,6 +198,23 @@ router.delete("/:id", (req, res) => {
         res.status(404).json({ message: "Recipe not found" });
     });
 });
+
+router.post("/:recipeid/postComment", (req, res) => {
+    userData.getUserById(req.user._id).then((user) => {
+        let comment = {};
+        comment.name = user[0].firstName + " " + user[0].lastName;
+        comment.profilePicPath = user[0].profilePicPath;
+        comment.content = req.body.message;
+        recipeData.addComment(comment, req.params.recipeid).then((recipe) => {
+            if (recipe) {
+                res.redirect(`/recipe/${recipe._id}`);
+            }
+        });
+    }).then(() => {}, () => {
+        res.sendStatus(500);
+    });
+});
+
 
 function isLoggedIn(req, res, next) {
 
