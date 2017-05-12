@@ -199,7 +199,7 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-router.post("/:recipeid/postComment", (req, res) => {
+router.post("/:recipeid/postComment", isLoggedIn, (req, res) => {
     userData.getUserById(req.user._id).then((user) => {
         let comment = {};
         comment.name = user[0].firstName + " " + user[0].lastName;
