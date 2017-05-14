@@ -41,6 +41,7 @@ path:
 ```
 {
     self: Bool,
+    recipeId: String,
     category: String,
     favorited: Bool,
 	creator: {
@@ -307,6 +308,13 @@ path:
 <textarea type="text" Name="Cooking Steps" id="steps"></textarea>
 <select id="category"> </select>
 <input type="submit" value="POST" formmethod="post" formaction="/recipe/:{{userId}}/create_recipe" />
+```
+
+### Comment
+``` HTML
+<form id="commentForm" name="commentForm">
+<textarea type="text" name="message"></textarea>
+<button formmethod="post" formaction="/recipe/postComment/:{{recipeId}}">SUBMIT</button>
 ```
 
 ### Jump to Edit Recipe Pages
