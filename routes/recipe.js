@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const data = require("../data");
@@ -81,6 +82,9 @@ router.get("/:id", (req, res) => {
         recipe.category = recipeDoc[0].category;
         if (req.isAuthenticated()) {
             recipe.loginUserId = req.user._id;
+            if (mongoose.Types.ObjectId(recipe.id).equals(req.user._id)) {
+                recipe.self = true;
+            }
         }
         let comments = [];
         recipeDoc[0].reviews.map(function(comment) {

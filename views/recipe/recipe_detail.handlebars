@@ -96,7 +96,7 @@
 					<textarea type="text" name="message" placeholder="Comment *" class="hint"></textarea>
 
                     {{#if loginUserId}}
-                    <button class="comment_button" formmethod="post" formaction="/recipe/postComment/{{recipeid}}">SUBMIT</button>
+                    <button class="comment_button" formmethod="post" formaction="/recipe/{{recipeid}}/postComment">SUBMIT</button>
                     {{else}}
                     <button class="comment_button" formmethod="post" formaction="/login">Login/Signup</button>
                     {{/if}}
