@@ -46,10 +46,11 @@ let exportedMethods = {
         });
     },
     favRecipe(userid, recipeid) {
+        let favRecipes = { recipeid };
         return User.findOneAndUpdate({
             _id: userid
         }, {
-            $push: { favRecipes: { recipeid } }
+            $push: { favRecipes: favRecipes }
         }, {
             safe: true,
             upsert: true

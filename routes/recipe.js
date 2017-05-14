@@ -112,7 +112,7 @@ router.get("/:id", (req, res) => {
             recipe.profilePicPath = user[0].profilePicPath;
             if (req.isAuthenticated()) {
                 userData.getUserById(req.user._id).then((user) => {
-                    if (user[0].favRecipes.find(req.params.id)) {
+                    if (_.find(user[0].favRecipes, req.params.id) === req.params.id) {
                         recipe.favorited = true;
                     }
                 });
