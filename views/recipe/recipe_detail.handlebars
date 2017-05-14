@@ -92,12 +92,12 @@
 			<div class="comment_title">
 				<h3>Leave a Comment</h3>
 			</div>
-			<form class="comment_form" id="commentForm" name="commentForm" method="post" action="/recipe/postComment">
-					<textarea name="message" placeholder="Comment *" class="hint"></textarea>
+			<form class="comment_form" id="commentForm" name="commentForm">
+					<textarea type="text" name="message" placeholder="Comment *" class="hint"></textarea>
                     {{#if loginUserId}}
-                    <input type="submit" value="submit" class="comment_button more active">
+                    <button class="comment_button" formmethod="post" formaction="/recipe/postComment/:{{recipeId}}">SUBMIT</button>
                     {{else}}
-                    <input type="button" value="Login/Signup" onclick="window.location='/login';" class="comment_button">
+                    <button class="comment_button" formmethod="post" formaction="/login">Login/Signup</button>
                     {{/if}}
 			</form>
 			<br />
@@ -105,7 +105,7 @@
 
 		<!-- comments -->
 		<div class="featured">
-			<h3 class="title">{{comments.length}}Comments</h3>
+			<h3 class="title">{{comments.length}} Comments</h3>
 			<ul id="style1">
 				{{#each comments}}
 				<li class="comment clearfix">
