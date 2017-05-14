@@ -64,6 +64,8 @@ router.get("/editprofile", isLoggedIn, (req, res) => {
         user.firstName = currentUser[0].firstName;
         user.lastName = currentUser[0].lastName;
         user.personalSummary = currentUser[0].personalSummary;
+        user.self = true;
+        user.loginUserId = currentUser[0]._id;
         res.render("user/edit_profile.handlebars", user);
     });
 });

@@ -23,14 +23,14 @@
 
         {{#if self}}
             <div class="header">
-                <a id="editButton" class="btn" href="/recipe/edit_recipe/{{id}}">Edit This Recipe</a>
+                <a id="editButton" class="btn" href="/recipe/edit_recipe/{{recipeid}}">Edit This Recipe</a>
             </div>
         {{else}}
             <div class="header">
                 {{#if favorited}}
                 <button id="favorite" class="btn" type="submit" formmethod="post" formaction="/user/unfavorite/{{id}}">Unfavorite</button>
                 {{else}}
-                <button id="favorite" class="btn" type="submit" formmethod="post" formaction="/user/favorite/{{id}}">Favorite</button>
+                <a href="/user/favorite/{{recipeid}}" id="favorite" class="btn">Favorite</a>
                 {{/if}}
             </div>
         {{/if}}
@@ -96,7 +96,7 @@
 					<textarea type="text" name="message" placeholder="Comment *" class="hint"></textarea>
 
                     {{#if loginUserId}}
-                    <button class="comment_button" formmethod="post" formaction="/recipe/postComment/:{{recipeId}}">SUBMIT</button>
+                    <button class="comment_button" formmethod="post" formaction="/recipe/postComment/{{recipeid}}">SUBMIT</button>
                     {{else}}
                     <button class="comment_button" formmethod="post" formaction="/login">Login/Signup</button>
                     {{/if}}
