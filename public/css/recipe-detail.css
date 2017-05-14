@@ -651,6 +651,13 @@ a.comments_number
 	height: 100px;
 	background: url("../images/samples/100x100/avatar.png");
 }
+
+.comment_author_avatar img
+{
+    height: 50px;
+    width: 50px;
+}
+
 .posted_by
 {
 	clear: both;
