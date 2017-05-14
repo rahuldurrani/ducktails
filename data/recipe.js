@@ -29,6 +29,15 @@ let exportedMethods = {
             return error;
         });
     },
+    getRecipeByCategory(name) {
+        return Recipe.find({
+            category: name
+        }).then((recipe) => {
+            return recipe;
+        }).catch((error) => {
+            return error;
+        });
+    },
     addRecipe(newRecipe) {
         var nrecipe = new Recipe(newRecipe);
         return nrecipe.save(newRecipe).then((recipe) => {
@@ -54,6 +63,20 @@ let exportedMethods = {
             $set: recipe
         }, {
             new: true
+        }).then((recipe) => {
+            return recipe;
+        }).catch((error) => {
+            return error;
+        })
+    },
+    addComment(comment, id) {
+        return Recipe.findOneAndUpdate({
+            _id: id
+        }, {
+            $push: { reviews: comment }
+        }, {
+            safe: true,
+            upsert: true
         }).then((recipe) => {
             return recipe;
         }).catch((error) => {

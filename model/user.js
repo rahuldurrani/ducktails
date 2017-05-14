@@ -42,7 +42,7 @@ const userSchema = new Schema({
         required: false
     }],
     favRecipes: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: false
     }]
 });

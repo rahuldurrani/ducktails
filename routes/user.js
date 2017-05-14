@@ -5,6 +5,56 @@ const userData = data.user;
 const recipeData = data.recipe;
 const multer = require('multer');
 
+router.get("/followers", isLoggedIn, (req, res) => {
+    // TODO: retrive data from database
+    createUserTemplate(req.user._id, true, true).then((userTemplate) => {
+        //console.log(userTemplate);
+        res.render("user/user_followers.handlebars", userTemplate);
+    }).catch((error) => {
+        console.log(error);
+    });
+});
+
+router.get("/followees", isLoggedIn, (req, res) => {
+    // TODO: retrive data from database
+    createUserTemplate(req.user._id, true, true).then((userTemplate) => {
+        //console.log(userTemplate);
+        res.render("user/user_followees.handlebars", userTemplate);
+        //res.json(userTemplate);
+    }).catch((error) => {
+        console.log(error);
+    });
+});
+
+router.get("/favorite/:id", isLoggedIn, (req, res) => {
+    userData.favRecipe(req.user._id, req.params.id).then((user) => {
+        res.redirect(`/recipe/${req.params.id}`);
+    });
+});
+
+router.get("/follow/:userid", isLoggedIn, (req, res) => {
+    userData.getUserById(req.user._id).then((myUser) => {
+        let myDetails = {};
+        myDetails.userId = myUser[0]._id;
+        myDetails.firstName = myUser[0].firstName;
+        myDetails.profilePicPath = myUser[0].profilePicPath;
+        myDetails.backgroundColor = "green";
+        myDetails.personalSummary = myUser[0].personalSummary;
+
+        userData.getUserById(req.params.userid).then((userToFollow) => {
+            let followerDetails = {};
+            followerDetails.userId = myUser[0]._id;
+            followerDetails.firstName = myUser[0].firstName;
+            followerDetails.profilePicPath = myUser[0].profilePicPath;
+            followerDetails.backgroundColor = "green";
+            followerDetails.personalSummary = myUser[0].personalSummary;
+            userData.followUser(req.user._id, myDetails, req.params.userid, followerDetails).then(() => {
+                res.render(`/user/${req.params.userid}`);
+            })
+        });
+    });
+});
+
 router.get("/editprofile", isLoggedIn, (req, res) => {
     userData.getUserById(req.user._id).then((currentUser) => {
         let user = {};
@@ -50,15 +100,6 @@ router.get("/:id", (req, res) => {
 
 });
 
-router.get("/", isLoggedIn, (req, res) => {
-    createUserTemplate(req.user._id, true, req.user._id).then((userTemplate) => {
-        res.render("user/user_profile.handlebars", userTemplate);
-    });
-});
-
-
-
-
 router.delete("/:id", (req, res) => {
     let userId = req.params.id;
     let currentUser = userData.getUserById(userId);
@@ -66,12 +107,10 @@ router.delete("/:id", (req, res) => {
     console.log("User with ID " + userId + " will be deleted.");
 });
 
-router.get("/followers", isLoggedIn, (req, res) => {
-    // TODO: retrive data from database
-    createUserTemplate(req.user._id).then((userTemplate) => {
-        res.render("user/user_followers.handlebars", userTemplate);
-    }).catch((error) => {
-        console.log(error);
+
+router.get("/", isLoggedIn, (req, res) => {
+    createUserTemplate(req.user._id, true, req.user._id).then((userTemplate) => {
+        res.render("user/user_profile.handlebars", userTemplate);
     });
 });
 
@@ -81,16 +120,13 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
         return next();
 
-    // if they aren't redirect them to the home page
-    //res.redirect('/123');
-    res.render("user/user_profile.handlebars", {
-        require_login: true
-    });
+    res.redirect('/login');
 }
 
 function createUserTemplate(id, self, loginUserId) {
     return userData.getUserById(id).then((user) => {
         userTemplate = {};
+        userTemplate.userId = id;
         userTemplate.firstName = user[0].firstName;
         userTemplate.lastName = user[0].lastName;
         userTemplate.profilePicPath = user[0].profilePicPath;

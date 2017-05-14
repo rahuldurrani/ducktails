@@ -33,12 +33,14 @@ router.get('/create_recipe', isLoggedIn, (req, res) => {
     // res.render("recipe/create_recipe.handlebars", {});
 });
 
-router.post('/create_recipe', multer({ dest: './public/img/' }).single('profilePic'), (req, res) => {
+router.post('/create_recipe', multer({ dest: './public/img/' }).single('recipePic'), (req, res) => {
     let newRecipe = {};
     let ingredients = [];
     newRecipe.title = req.body.Title;
     newRecipe.servings = req.body.serving;
     newRecipe.preptime = req.body.cookTime;
+    newRecipe.description = req.body.description;
+    newRecipe.category = req.body.category
     if (req.file) {
         newRecipe.recipePicPath = "/" + req.file.path;
     }
@@ -68,14 +70,15 @@ router.post('/create_recipe', multer({ dest: './public/img/' }).single('profileP
 });
 
 router.get("/:id", (req, res) => {
+    let recipe = {};
     recipeData.getRecipeById(req.params.id).then((recipeDoc) => {
-        // res.json(recipe);
-        let recipe = {};
+        recipe.recipeid = recipeDoc[0]._id;
         recipe.creatorName = recipeDoc[0].creator.name;
-        recipe.createrProfileLink = '/user'
+        recipe.id = recipeDoc[0].creator._id;
         recipe.title = recipeDoc[0].title;
         recipe.recipePicPath = recipeDoc[0].recipePicPath;
         recipe.description = recipeDoc[0].description;
+        recipe.category = recipeDoc[0].category;
         if (req.isAuthenticated()) {
             recipe.loginUserId = req.user._id;
         }
@@ -103,7 +106,20 @@ router.get("/:id", (req, res) => {
         });
         recipe.steps = steps;
         recipe.createdDate = moment(recipeDoc[0].date).format('MM/DD/YYYY');
-        res.render("recipe/recipe_detail.handlebars", recipe);
+
+    }).then(() => {
+        userData.getUserById(recipe.id).then((user) => {
+            recipe.profilePicPath = user[0].profilePicPath;
+            if (req.isAuthenticated()) {
+                userData.getUserById(req.user._id).then((user) => {
+                    if (user[0].favRecipes.find(req.params.id)) {
+                        recipe.favorited = true;
+                    }
+                });
+            }
+        }).then(() => {
+            res.render("recipe/recipe_detail.handlebars", recipe);
+        });
     }).catch((error) => {
         // Not found!
         res.status(404).json({ message: error });
@@ -128,7 +144,7 @@ router.get("/", (req, res) => {
                 card.backgroundColor = "orange";
             }
             card.backgroundPicPath = recipe.recipePicPath;
-            card.category = 'Margarita';
+            card.category = recipe.category;
             card.title = recipe.title;
             card.link = "http://www.foodandwine.com/recipes/mediterranean-pink-lady";
             card.firstName = recipe.creator.name;
@@ -145,9 +161,6 @@ router.get("/", (req, res) => {
         res.status(500).send();
     });
 });
-
-
-
 
 router.post("/", (req, res) => {
     let newRecipe = req.body;
@@ -199,6 +212,23 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+router.post("/:recipeid/postComment", isLoggedIn, (req, res) => {
+    userData.getUserById(req.user._id).then((user) => {
+        let comment = {};
+        comment.name = user[0].firstName + " " + user[0].lastName;
+        comment.profilePicPath = user[0].profilePicPath;
+        comment.content = req.body.message;
+        recipeData.addComment(comment, req.params.recipeid).then((recipe) => {
+            if (recipe) {
+                res.redirect(`/recipe/${recipe._id}`);
+            }
+        });
+    }).then(() => {}, () => {
+        res.sendStatus(500);
+    });
+});
+
+
 function isLoggedIn(req, res, next) {
 
     // if user is authenticated in the session, carry on
@@ -206,10 +236,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     // if they aren't redirect them to the home page
-    //res.redirect('/123');
-    res.render("user/user_profile.handlebars", {
-        require_login: true
-    });
+    res.redirect('/login');
 }
 
 

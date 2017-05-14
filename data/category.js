@@ -11,9 +11,11 @@ let exportedMethods = {
             return categoryMap;
         });
     },
-    addCategory(name) {
+    addCategory(name, backgroundPicPath, description) {
         var cat = new category({
-            name: name
+            name: name,
+            backgroundPicPath: backgroundPicPath,
+            description: description
         });
 
         return cat.save().then((doc) => {
