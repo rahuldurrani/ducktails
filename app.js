@@ -6,12 +6,12 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const flash = require('connect-flash');
-
 const configRoutes = require("./routes");
 
 const handlebarInstance = exphbs.create({
     defaultLayout: 'main.handlebars'
 });
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

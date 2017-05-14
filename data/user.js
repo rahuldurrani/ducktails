@@ -18,14 +18,6 @@ let exportedMethods = {
             return user;
         });
     },
-    // addUser(newUser, password) {
-    //     return User.register(newUser, password, function(err, user) {
-    //         if (err) {
-    //             // handle the error
-    //         }
-    //         return user;
-    //     });
-    // },
     addUser(newUser) {
         var user = new User(newUser);
         return user.save(newUser).then((doc) => {
@@ -53,8 +45,42 @@ let exportedMethods = {
             return error;
         });
     },
-    deleteUser(id) {
-
+    favRecipe(userid, recipeid) {
+        return User.findOneAndUpdate({
+            _id: userid
+        }, {
+            $push: { favRecipes: { recipeid } }
+        }, {
+            safe: true,
+            upsert: true
+        }).then((user) => {
+            return user;
+        }).catch((error) => {
+            return error;
+        });
+    },
+    followUser(id, myDetails, followerid, followerDetails) {
+        return User.findOneAndUpdate({
+            _id: id
+        }, {
+            $push: { followers: followerDetails }
+        }, {
+            safe: true,
+            upsert: true
+        }).then((user) => {
+            return User.findOneAndUpdate({
+                _id: followerid
+            }, {
+                $push: { followees: myDetails }
+            }, {
+                safe: true,
+                upsert: true
+            }).then((user1) => {
+                return user1;
+            });
+        }).catch((error) => {
+            return error;
+        });
     }
 };
 

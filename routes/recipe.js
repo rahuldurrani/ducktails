@@ -70,15 +70,15 @@ router.post('/create_recipe', multer({ dest: './public/img/' }).single('recipePi
 });
 
 router.get("/:id", (req, res) => {
+    let recipe = {};
     recipeData.getRecipeById(req.params.id).then((recipeDoc) => {
-        // res.json(recipe);
-        let recipe = {};
         recipe.recipeid = recipeDoc[0]._id;
         recipe.creatorName = recipeDoc[0].creator.name;
-        recipe.createrProfileLink = '/user'
+        recipe.id = recipeDoc[0].creator._id;
         recipe.title = recipeDoc[0].title;
         recipe.recipePicPath = recipeDoc[0].recipePicPath;
         recipe.description = recipeDoc[0].description;
+        recipe.category = recipeDoc[0].category;
         if (req.isAuthenticated()) {
             recipe.loginUserId = req.user._id;
         }
@@ -106,7 +106,20 @@ router.get("/:id", (req, res) => {
         });
         recipe.steps = steps;
         recipe.createdDate = moment(recipeDoc[0].date).format('MM/DD/YYYY');
-        res.render("recipe/recipe_detail.handlebars", recipe);
+
+    }).then(() => {
+        userData.getUserById(recipe.id).then((user) => {
+            recipe.profilePicPath = user[0].profilePicPath;
+            if (req.isAuthenticated()) {
+                userData.getUserById(req.user._id).then((user) => {
+                    if (user[0].favRecipes.find(req.params.id)) {
+                        recipe.favorited = true;
+                    }
+                });
+            }
+        }).then(() => {
+            res.render("recipe/recipe_detail.handlebars", recipe);
+        });
     }).catch((error) => {
         // Not found!
         res.status(404).json({ message: error });

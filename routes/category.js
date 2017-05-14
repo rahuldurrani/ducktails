@@ -2,13 +2,34 @@ const express = require('express');
 const router = express.Router();
 const data = require("../data");
 const categoryData = data.category;
+const recipeData = data.recipe;
 
 router.get("/:name", (req, res) => {
-    categoryData.getCategoryByName(req.params.name).then((category) => {
-        res.json(category);
-    }).catch((error) => {
-        // Not found!
-        res.status(404).json({ message: "Category not found" });
+    recipeData.getRecipeByCategory(req.params.name).then((recipeDoc) => {
+        let recipes = [];
+        recipeDoc.map(function(recipe) {
+            let card = {};
+            let i = Math.floor(Math.random() * 3) + 1
+            if (i === 1) {
+                card.backgroundColor = "black";
+            } else if (i == 2) {
+                card.backgroundColor = "blue";
+            } else {
+                card.backgroundColor = "orange";
+            }
+            card.backgroundPicPath = recipe.recipePicPath;
+            card.category = recipe.category;
+            card.title = recipe.title;
+            card.link = "http://www.foodandwine.com/recipes/mediterranean-pink-lady";
+            card.firstName = recipe.creator.name;
+            card.description = recipe.description;
+            card.recipeId = recipe._id;
+            card.id = recipe.creator._id;
+            recipes.push(card);
+        });
+        categoryData.getCategoryByName((req.params.name)).then((category) => {
+            res.render("category/category_detail.handlebars", { backgroundPicPath: category[0].backgroundPicPath, name: category[0].name, description: category[0].description, recipes });
+        });
     });
 });
 
@@ -24,6 +45,8 @@ router.get("/", (req, res) => {
             let card = {};
             card.categoryId = category._id;
             card.name = category.name;
+            card.backgroundPicPath = category.backgroundPicPath;
+            card.description = category.description;
             card.recommended = true;
             categories.push(card);
         });

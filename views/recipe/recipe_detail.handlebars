@@ -5,15 +5,15 @@
 	<link href="/public/css/recipe-detail.css" rel="stylesheet" type="text/css" media="all" />
 	<div id="recipeSide">
 		<div id="logo">
-			{{#with creator}}
+			{{!--{{#with creator}}--}}
 			<img src="{{profilePicPath}}" alt="" />
-			<h1><a href="/user/:{{id}}">{{firstName}} {{lastName}}</a></h1>
+			<h1><a href="/user/{{id}}">{{creatorName}}</a></h1>
 			<span>{{personalSummary}}</span>
-			{{/with}}
+			{{!--{{/with}}--}}
 		</div>
 		<div id="menu">
 			<ul>
-                <li><a href="/category/:{{category}}"><p class="date">Category: <b>{{category}}</b></p></a></li>
+                <li><a href="/category/{{category}}"><p class="date">Category: <b>{{category}}</b></p></a></li>
                 <li><a><p class="date">Posted on <b>{{createdDate}}</b></p></a></li>
 			</ul>
 		</div>
@@ -23,14 +23,14 @@
 
         {{#if self}}
             <div class="header">
-                <a id="editButton" class="btn" href="/recipe/edit_recipe/:{{id}}">Edit This Recipe</a>
+                <a id="editButton" class="btn" href="/recipe/edit_recipe/{{id}}">Edit This Recipe</a>
             </div>
         {{else}}
             <div class="header">
                 {{#if favorited}}
-                <a id="favorite" class="btn" type="submit" formmethod="put" formaction="/user/unfavorite/:{{id}}">Unfavorite</a>
+                <button id="favorite" class="btn" type="submit" formmethod="post" formaction="/user/unfavorite/{{id}}">Unfavorite</button>
                 {{else}}
-                <a id="favorite" class="btn" type="submit" formmethod="put" formaction="/user/favorite/:{{id}}">Favorite</a>
+                <button id="favorite" class="btn" type="submit" formmethod="post" formaction="/user/favorite/{{id}}">Favorite</button>
                 {{/if}}
             </div>
         {{/if}}
