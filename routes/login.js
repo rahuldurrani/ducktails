@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', function(req, res) {
-    res.render('login_signup/login_signup.handlebars', { user: req.user });
+    res.render('login_signup/login.handlebars', { error: req.flash('loginMessage') });
 });
 
 router.post('/', passport.authenticate('local-login', {

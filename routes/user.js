@@ -43,11 +43,11 @@ router.get("/follow/:userid", isLoggedIn, (req, res) => {
 
         userData.getUserById(req.params.userid).then((userToFollow) => {
             let followerDetails = {};
-            followerDetails.userId = myUser[0]._id;
-            followerDetails.firstName = myUser[0].firstName;
-            followerDetails.profilePicPath = myUser[0].profilePicPath;
+            followerDetails.userId = userToFollow[0]._id;
+            followerDetails.firstName = userToFollow[0].firstName;
+            followerDetails.profilePicPath = userToFollow[0].profilePicPath;
             followerDetails.backgroundColor = "green";
-            followerDetails.personalSummary = myUser[0].personalSummary;
+            followerDetails.personalSummary = userToFollow[0].personalSummary;
             userData.followUser(req.user._id, myDetails, req.params.userid, followerDetails).then(() => {
                 res.redirect(`/user/${req.params.userid}`);
             })
@@ -95,20 +95,12 @@ router.get("/:id", (req, res) => {
             });
         }
     } else {
-        createUserTemplate(req.params.id, false).then((userTemplate) => {
+        createUserTemplate(req.params.id, false, false).then((userTemplate) => {
             res.render("user/user_profile.handlebars", userTemplate);
         });
     }
 
 });
-
-router.delete("/:id", (req, res) => {
-    let userId = req.params.id;
-    let currentUser = userData.getUserById(userId);
-
-    console.log("User with ID " + userId + " will be deleted.");
-});
-
 
 router.get("/", isLoggedIn, (req, res) => {
     createUserTemplate(req.user._id, true, req.user._id).then((userTemplate) => {
@@ -117,7 +109,6 @@ router.get("/", isLoggedIn, (req, res) => {
 });
 
 function isLoggedIn(req, res, next) {
-
     // if user is authenticated in the session, carry on
     if (req.isAuthenticated())
         return next();
@@ -159,6 +150,8 @@ function createUserTemplate(id, self, loginUserId) {
                 userTemplate.recipes.push(card);
             });
         });
+        console.log("Function");
+        console.log(userTemplate);
         return userTemplate;
     }).catch((error) => {
         return error;

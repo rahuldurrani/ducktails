@@ -6,7 +6,7 @@ const { User } = require("../model/user");
 router.get('/', function(req, res) {
 
     // render the page and pass in any flash data if it exists
-    res.json({ message: req.flash('signupMessage') });
+    res.render('login_signup/signup.handlebars', { error: req.flash('signupMessage') });
 });
 
 router.post('/', passport.authenticate('local-signup', {

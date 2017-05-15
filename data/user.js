@@ -64,7 +64,7 @@ let exportedMethods = {
         return User.findOneAndUpdate({
             _id: id
         }, {
-            $push: { followers: followerDetails }
+            $push: { followees: followerDetails }
         }, {
             safe: true,
             upsert: true
@@ -72,7 +72,7 @@ let exportedMethods = {
             return User.findOneAndUpdate({
                 _id: followerid
             }, {
-                $push: { followees: myDetails }
+                $push: { followers: myDetails }
             }, {
                 safe: true,
                 upsert: true

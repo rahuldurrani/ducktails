@@ -97,6 +97,13 @@
 											<form method="post" action="/login" accept-charset="UTF-8">
 												<input id="email" class="form-control" type="text" placeholder="Email" name="email">
 												<input id="password" class="form-control" type="password" placeholder="Password" name="password">
+												{{#if error }}
+            										<div class="form-group">
+              										<div class="alert alert-danger">
+                									{{ error }}
+              										</div>
+            										</div>
+            									{{/if}}
 												<input class="btn btn-default btn-login" type="submit" value="Login">
 											</form>
 										</div>
@@ -108,7 +115,14 @@
 											<form method="post" html="{:multipart=>true}" data-remote="true" action="/signup" accept-charset="UTF-8">
 												<input id="email" class="form-control" type="text" placeholder="Email" name="email">
 												<input id="password" class="form-control" type="password" placeholder="Password" name="password">
-												<input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
+												<input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password"  name="password_confirmation">
+												{{#if error }}
+            										<div class="form-group">
+              										<div class="alert alert-danger">
+                									{{ error }}
+              										</div>
+            										</div>
+            									{{/if}}
 												<input class="btn btn-default btn-register" type="submit" value="Create account" name="commit">
 											</form>
 										</div>

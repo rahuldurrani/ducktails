@@ -245,23 +245,6 @@ router.post("/", (req, res) => {
 
 });
 
-router.put("/:id", (req, res) => {
-    let updatedRecipe = req.body;
-
-    let currentRecipe = recipeData.getRecipeById(req.params.id);
-
-    currentRecipe.then(() => {
-        return recipeData.updateRecipe(updatedRecipe, req.params.id)
-            .then((resultRecipe) => {
-                res.json(resultRecipe);
-            }).catch((err) => {
-                res.status(500).json({ error: err });
-            });
-    }).catch((err) => {
-        res.status(404).json({ error: err });
-    });
-});
-
 router.delete("/:id", (req, res) => {
     let recipeId = req.params.id;
     let currentRecipe = recipeData.getRecipeById(recipeId);
