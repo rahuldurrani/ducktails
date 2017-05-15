@@ -88,7 +88,6 @@ router.get("/:id", (req, res) => {
         }
         let comments = [];
         recipeDoc[0].reviews.map(function(comment) {
-            comment.date = moment(comment.date).format('MM/DD/YYYY HH.mm');
             comments.push(comment);
         });
         recipe.comments = comments;
