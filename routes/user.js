@@ -49,7 +49,7 @@ router.get("/follow/:userid", isLoggedIn, (req, res) => {
             followerDetails.backgroundColor = "green";
             followerDetails.personalSummary = myUser[0].personalSummary;
             userData.followUser(req.user._id, myDetails, req.params.userid, followerDetails).then(() => {
-                res.render(`/user/${req.params.userid}`);
+                res.redirect(`/user/${req.params.userid}`);
             })
         });
     });
@@ -149,7 +149,7 @@ function createUserTemplate(id, self, loginUserId) {
                     card.backgroundColor = "orange";
                 }
                 card.backgroundPicPath = recipe.recipePicPath;
-                card.category = 'Mediterranean';
+                card.category = recipe.category;
                 card.title = recipe.title;
                 card.link = "http://www.foodandwine.com/recipes/mediterranean-pink-lady";
                 card.firstName = recipe.creator.name;

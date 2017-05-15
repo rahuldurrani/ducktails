@@ -54,9 +54,6 @@ let exportedMethods = {
         });
     },
     updateRecipe(recipe, id) {
-        if (!ObjectID.isValid(id)) {
-            throw "Invalid ObjectID";
-        }
         return Recipe.findOneAndUpdate({
             _id: id
         }, {

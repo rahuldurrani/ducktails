@@ -19,25 +19,24 @@
                 <h3>Prep Time:</h3>
                 <input type="text" Name="cookTime" placeholder="Enter time in minutes ." value="{{cookTime}}" required="" id="cookTime">
                 <h3>Serving:</h3>
-                <input type="text" Name="Serving" placeholder="Total number of servings..." required="" value="{{serving}}" id="serving">
+                <input type="text" Name="serving" placeholder="Total number of servings..." required="" value="{{serving}}" id="serving">
                 <h3>Description:</h3>
-                <textarea type="text" Name="Description" placeholder="Write down a brief piece of descrition for others to get your recipe easier" description="{{description}}" id="description"></textarea>
+                <textarea type="text" Name="description" placeholder="Write down a brief piece of descrition for others to get your recipe easier" id="description">{{description}}</textarea>
                 <h3>Ingredients:</h3>
                 <textarea type="text" Name="ingredients" placeholder="List everything needed" value="ingredients" id="ingredients"></textarea>
                 <h3>Cooking Step:</h3>
                 <textarea type="text" Name="steps" placeholder="Whatever needed" value="steps" id="steps"></textarea>
                 <h3>Category:</h3>
-                <select id="category">
+                <select id="category" name="category">
                     {{#each categories}}
-                    <option value="{{categoryId}}">{{name}}</option>
+                    <option value="{{name}}">{{name}}</option>
                     {{/each}}
                 </select>
                 <div class="send-button">
-                <input type="submit" value="SAVE" formmethod="put" formaction="/recipe/:{{id}}" />
+                <input type="submit" value="SAVE" formmethod="post" formaction="/recipe/edit_recipe/{{id}}" />
                 <input type="button" value="CANCEL" onclick="window.history.back()" />
-                <input type="button" value="DELETE" formmethod="delete" formaction="/recipe/:{{id}}" />
+                <input type="button" value="DELETE" formmethod="delete" formaction="/recipe/{{id}}" />
                 </div>
-
             </form>
         </div>
     </div>

@@ -28,10 +28,8 @@ router.get('/create_recipe', isLoggedIn, (req, res) => {
         });
         res.render("recipe/create_recipe.handlebars", { categories: categories, loginUserId });
     }, () => {
-        // Something went wrong with the server!
         res.status(500).send();
     });
-    // res.render("recipe/create_recipe.handlebars", {});
 });
 
 router.post('/create_recipe', multer({ dest: './public/img/' }).single('recipePic'), (req, res) => {
@@ -62,12 +60,79 @@ router.post('/create_recipe', multer({ dest: './public/img/' }).single('recipePi
         console.log(newRecipe);
         recipeData.addRecipe(newRecipe).then((addedRecipe) => {
 
-            res.redirect('/' + addedRecipe._id);
+            res.redirect('/recipe/' + addedRecipe._id);
         }, () => {
             res.sendStatus(500);
         });
     });
 
+});
+
+router.get("/edit_recipe/:recipeid", isLoggedIn, (req, res) => {
+    let categories = [];
+    let newRecipe = {};
+    recipeData.getRecipeById(req.params.recipeid).then((recipe) => {
+        newRecipe.id = recipe[0]._id;
+        newRecipe.profilePicPath = recipe[0].profilePicPath;
+        newRecipe.title = recipe[0].title;
+        newRecipe.cookTime = recipe[0].preptime;
+        newRecipe.serving = recipe[0].servings;
+        newRecipe.description = recipe[0].description;
+    }).then(() => {
+        categoryData.getAllCategories().then((categoryList) => {
+            categoryList.map(function(category) {
+                let card = {};
+                card.categoryId = category._id;
+                card.name = category.name;
+                card.recommended = true;
+                categories.push(card);
+            });
+        });
+        res.render('recipe/edit_recipe.handlebars', {
+            id: newRecipe.id,
+            title: newRecipe.title,
+            cookTime: newRecipe.cookTime,
+            serving: newRecipe.serving,
+            description: newRecipe.description,
+            profilePicPath: newRecipe.profilePicPath,
+            categories,
+            loginUserId: req.user._id
+        });
+    });
+});
+
+router.post("/edit_recipe/:recipeid", multer({ dest: './public/img/' }).single('recipePic'), isLoggedIn, (req, res) => {
+    let newRecipe = {};
+    let ingredients = [];
+    newRecipe.title = req.body.Title;
+    newRecipe.servings = req.body.serving;
+    newRecipe.preptime = req.body.cookTime;
+    newRecipe.description = req.body.description;
+    newRecipe.category = req.body.category
+    if (req.file) {
+        newRecipe.recipePicPath = "/" + req.file.path;
+    }
+    newRecipe.steps = req.body.steps.split(/\r?\n/);
+    req.body.ingredients.split(/\r?\n/).map(function(ingredient) {
+        let doc = {};
+        doc.name = ingredient;
+        ingredients.push(doc);
+    });
+    newRecipe.ingredients = ingredients;
+
+    userData.getUserById(req.user._id).then((user) => {
+        let creator = {};
+        creator._id = user[0]._id;
+        creator.name = user[0].firstName + " " + user[0].lastName;
+        newRecipe.creator = creator;
+    }).then(() => {
+        console.log(newRecipe);
+        recipeData.updateRecipe(newRecipe, req.params.recipeid).then((addedRecipe) => {
+            res.redirect('/recipe/' + req.params.recipeid);
+        }, () => {
+            res.sendStatus(500);
+        });
+    });
 });
 
 router.get("/:id", (req, res) => {

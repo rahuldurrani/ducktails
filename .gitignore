@@ -39,3 +39,5 @@ jspm_packages
 #VS Code files
 .vscode/
 
+#Images
+public/img
