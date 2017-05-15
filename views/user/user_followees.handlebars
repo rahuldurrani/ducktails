@@ -13,9 +13,9 @@
                 {{#if self}}
                 <li><a href="/user/edit_profile">EDIT PROFILE</a></li>
                 {{else if following}}
-                <li class="unselectable"><a><button formmethod="post" type="submit" formaction"/user/follow/:{{userId}}" class="follow-btn">UNFOLLOW</button></a></li>
+                <li class="unselectable"><a><button formmethod="post" type="submit" formaction"/user/follow/{{userId}}" class="follow-btn">UNFOLLOW</button></a></li>
                 {{else}}
-                <li class="unselectable"><a><button formmethod="post" type="submit" formaction="/user/follow/:{{userId}}" class="follow-btn">FOLLOW</button></a></li>
+                <li class="unselectable"><a><button formmethod="post" type="submit" formaction="/user/follow/{{userId}}" class="follow-btn">FOLLOW</button></a></li>
                 {{/if}}
                 <li><a href="/user/followers"><p class="date"><b>{{followers.length}}</b> Followers</p></a></li>
                 <li><a href="/user/followees"><p class="date"><b>{{followees.length}}</b> Followees</p></a></li>

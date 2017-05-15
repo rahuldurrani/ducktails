@@ -88,6 +88,7 @@ router.get("/:id", (req, res) => {
         }
         let comments = [];
         recipeDoc[0].reviews.map(function(comment) {
+            comment.date = moment(comment.date).format('MM/DD/YYYY HH.mm');
             comments.push(comment);
         });
         recipe.comments = comments;
@@ -110,7 +111,6 @@ router.get("/:id", (req, res) => {
         });
         recipe.steps = steps;
         recipe.createdDate = moment(recipeDoc[0].date).format('MM/DD/YYYY');
-
     }).then(() => {
         userData.getUserById(recipe.id).then((user) => {
             recipe.profilePicPath = user[0].profilePicPath;

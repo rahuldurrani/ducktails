@@ -8,6 +8,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const configRoutes = require("./routes");
 
+const port = process.env.PORT || 4000;
 const handlebarInstance = exphbs.create({
     defaultLayout: 'main.handlebars'
 });
@@ -33,6 +34,6 @@ app.set('view engine', 'handlebars');
 
 configRoutes(app);
 
-app.listen(4000, () => {
-    console.log("The routes will be running on http://localhost:4000");
+app.listen(port, () => {
+    console.log(`Started up at Port: ${port}`);
 });
